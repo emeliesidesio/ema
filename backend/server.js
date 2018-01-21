@@ -4,6 +4,7 @@ import mongoose from "mongoose"
 import cors from "cors"
 import uuid from "uuid/v4"
 import bcrypt from "bcrypt-nodejs"
+//Hej
 
 // Express setup, including JSON body parsing.
 const app = express()
