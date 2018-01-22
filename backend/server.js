@@ -15,7 +15,7 @@ app.use(cors())
 
 // Connect to MongoDB, on the "products-api" database. If the db doesn't
 // exist, mongo will create it.
-mongoose.connect("mongodb://localhost/ema", { useMongoClient: true })
+mongoose.connect("mongodb://localhost/ema")
 
 // This makes mongo use ES6 promises, instead of its own implementation
 mongoose.Promise = Promise
@@ -32,16 +32,12 @@ const User = mongoose.model("User", {
   email: {
     type: String
   },
-  firstName: {
-    type: String
-  },
-  lastName: {
-    type: String
-  },
+  firstName: String,
+  lastName: String,
   password: {
     type: String
   },
-  accesToken: {
+  accessToken: {
     type: String,
     default: () => uuid()
   }
@@ -73,5 +69,27 @@ app.get("/", (req, res) => {
 })
 
 // Add more endpoints here!
+app.post("/users", (req, res) => {
+  const { password } = req.body
+  const hash = bcrypt.hashSync(password)
+
+  const user = new User ({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    password: hash,
+    accessToken: req.body.accessToken
+  })
+
+  user.save()
+  .then(() => { res.status(201).json({answer: "User created, user signed In"}) })
+  .catch(err => { res.status(401).json(err) })
+})
+
+app.get("/users", (req, res) => {
+  User.find().then(allUsers => {
+    res.json(allUsers)
+  })
+})
 
 app.listen(8080, () => console.log("EMA listening on port 8080!"))
