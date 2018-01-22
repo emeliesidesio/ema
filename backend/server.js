@@ -24,14 +24,8 @@ mongoose.Promise = Promise
 mongoose.connection.on("error", err => console.error("Connection error:", err))
 mongoose.connection.once("open", () => console.log("Connected to mongodb"))
 
-//
-// Define a model here.
-// User Model:
+
 const User = mongoose.model("User", {
-  userId: {
-    type: String,
-    default: () => uuid()
-  },
   email: {
     type: String,
     required: true
@@ -53,9 +47,9 @@ const User = mongoose.model("User", {
     default: () => uuid()
   }
 })
-// Event info model:
-const eventInfo = mongoose.model("eventInfo", {
-  userId: String,
+
+const EventInfo = mongoose.model("eventInfo", {
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   title: {
     type: String,
     required: true
@@ -74,19 +68,8 @@ const eventInfo = mongoose.model("eventInfo", {
   }
 })
 
-// Example root endpoint to get started with
-app.get("/", (req, res) => {
-  const password = "supersecretpassword"
-  const hash = bcrypt.hashSync(password)
-
-  res.send(`ema api. Here's an example of an encrypted password: ${hash}`)
-})
-
-// Add more endpoints here!
+// signup part:
 app.post("/signup", (req, res) => {
-  const { password } = req.body
-  const hash = bcrypt.hashSync(password)
-
   const user = new User(req.body)
   user.password = bcrypt.hashSync(user.password)
 
@@ -100,10 +83,30 @@ app.get("/signup", (req, res) => {
     res.json(allUsers)
   })
 })
-//Login part:
 
+// login part:
+app.post("/login", (req, res) => {
+  User.findOne({ email: req.body.email }).then(user => {
+    if (bcrypt.compareSync(req.body.password, user.password)) {
+      res.status(200).json({
+        message: "Welcome!",
+        accessToken: user.token
+      })
+    } else {
+      res.status(401).json({ message: "Authentication failed" })
+    }
+  })
+})
+
+app.get("/users/:_id", (req, res) => {
+  User.find({ creator: req.params.userId }).then(allUsers => {
+    res.json(allUsers)
+  })
+})
+
+// middleware
 const findUser = (req, res, next) => {
-  User.findById(req.params.userId).then(user => {
+  User.findOne({ userId: req.params.userId }).then(user => {
     if (user.accessToken === req.headers.token) {
       req.email = user.email
       next()
@@ -112,26 +115,9 @@ const findUser = (req, res, next) => {
     }
  })
 }
-app.use("/user/:userId", findUser)
 
-app.get("/login", (req, res) => {
-  User.find().then(allUsers => {
-    res.json(allUsers)
-  })
-})
+// mount middleware
+app.use("/users/:_id", findUser)
 
-app.post("/login", (req, res) => {
-  User.findOne({ email: req.body.email }).then(user => {
-    if (bcrypt.compareSync(req.body.password, user.password)) {
-      res.status(200).json({
-        message: "Welcome!",
-        accessToken: user.token,
-        id: user.userId
-      })
-    } else {
-      res.status(401).json({ message: "Authentication failed" })
-    }
-  })
-})
 
 app.listen(8080, () => console.log("EMA listening on port 8080!"))
