@@ -24,7 +24,6 @@ mongoose.Promise = Promise
 mongoose.connection.on("error", err => console.error("Connection error:", err))
 mongoose.connection.once("open", () => console.log("Connected to mongodb"))
 
-
 const User = mongoose.model("User", {
   email: {
     type: String,
