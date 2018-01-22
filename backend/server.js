@@ -4,7 +4,6 @@ import mongoose from "mongoose"
 import cors from "cors"
 import uuid from "uuid/v4"
 import bcrypt from "bcrypt-nodejs"
-//Hej
 
 // Express setup, including JSON body parsing.
 const app = express()
@@ -27,15 +26,48 @@ mongoose.connection.once("open", () => console.log("Connected to mongodb"))
 
 //
 // Define a model here.
-//
+// User Model:
+const User = mongoose.model("User", {
+  id: Number,
+  email: {
+    type: String
+  },
+  firstName: {
+    type: String
+  },
+  lastName: {
+    type: String
+  },
+  password: {
+    type: String
+  },
+  accesToken: {
+    type: String,
+    default: () => uuid()
+  }
+})
+// Event info model:
+const eventInfo = mongoose.model("eventInfo", {
+  id: Number,
+  title: {
+    type: String
+  },
+  date: {
+    type: Date
+  },
+  location: {
+    type: String
+  },
+  guest: {
+    name: String,
+    attending: Boolean
+  }
+})
 
 // Example root endpoint to get started with
 app.get("/", (req, res) => {
   const password = "supersecretpassword"
   const hash = bcrypt.hashSync(password)
-
-  // bcrypt.compareSync("supersecretpassword", hash) // true
-  // bcrypt.compareSync("incorrectpassword", hash) // false
 
   res.send(`ema api. Here's an example of an encrypted password: ${hash}`)
 })
