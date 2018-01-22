@@ -54,13 +54,16 @@ const User = mongoose.model("User", {
 const eventInfo = mongoose.model("eventInfo", {
   id: Number,
   title: {
-    type: String
+    type: String,
+    required: true
   },
   date: {
-    type: Date
+    type: Date,
+    required: true
   },
   location: {
-    type: String
+    type: String,
+    required: true
   },
   guest: {
     name: String,
@@ -77,20 +80,52 @@ app.get("/", (req, res) => {
 })
 
 // Add more endpoints here!
-app.post("/users", (req, res) => {
+app.post("/signup", (req, res) => {
   const { password } = req.body
   const hash = bcrypt.hashSync(password)
 
   const user = new User(req.body)
 
   user.save()
-  .then(() => { res.status(201).json({answer: "User created, user signed In"}) })
+  .then(() => { res.status(201).json({answer: "User created"}) })
   .catch(err => { res.status(401).json(err) })
 })
 
-app.get("/users", (req, res) => {
+app.get("/signup", (req, res) => {
   User.find().then(allUsers => {
     res.json(allUsers)
+  })
+})
+//Login part:
+
+const findUser = (req, res, next) => {
+  User.findById(req.params.id).then(user => {
+    if (user.accessToken === req.headers.token) {
+      req.user = user
+      next()
+    } else {
+      res.status(401).send("Unauthenticated")
+    }
+ })
+}
+
+app.get("/login", (req, res) => {
+  User.find().then(allUsers => {
+    res.json(allUsers)
+  })
+})
+
+app.post("/login", (req, res) => {
+  User.findOne({ email: req.body.email }).then(user => {
+    if (bcrypt.compareSync(req.body.password, user.password)) {
+      res.json({
+        message: "Welcome!",
+        accessToken: user.token,
+        id: user.id
+      })
+    } else {
+      res.status(401).json({ message: "Authentication failed" })
+    }
   })
 })
 
