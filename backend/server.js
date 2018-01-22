@@ -30,12 +30,20 @@ mongoose.connection.once("open", () => console.log("Connected to mongodb"))
 const User = mongoose.model("User", {
   id: Number,
   email: {
-    type: String
+    type: String,
+    required: true
   },
-  firstName: String,
-  lastName: String,
+  firstName: {
+    type: String,
+    required: true
+  },
+  lastName: {
+    type: String,
+    required: true
+  },
   password: {
-    type: String
+    type: String,
+    required true
   },
   accessToken: {
     type: String,
@@ -73,13 +81,7 @@ app.post("/users", (req, res) => {
   const { password } = req.body
   const hash = bcrypt.hashSync(password)
 
-  const user = new User ({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: hash,
-    accessToken: req.body.accessToken
-  })
+  const user = new User(req.body)
 
   user.save()
   .then(() => { res.status(201).json({answer: "User created, user signed In"}) })
