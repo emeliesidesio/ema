@@ -98,17 +98,11 @@ app.post("/login", (req, res) => {
   })
 })
 
-app.get("/users/:_id", (req, res) => {
-  User.find({ creator: req.params.userId }).then(allUsers => {
-    res.json(allUsers)
-  })
-})
-
 // middleware
 const findUser = (req, res, next) => {
-  User.findOne({ userId: req.params.userId }).then(user => {
+  User.findById(req.params.userId).then(user => {
     if (user.accessToken === req.headers.token) {
-      req.email = user.email
+      req.user = user
       next()
     } else {
       res.status(401).send("Unauthenticated")
@@ -117,7 +111,10 @@ const findUser = (req, res, next) => {
 }
 
 // mount middleware
-app.use("/users/:_id", findUser)
+app.use("/users/:userId", findUser)
 
+app.get("/users/:userId", (req, res) => {
+    res.json(req.user)
+})
 
 app.listen(8080, () => console.log("EMA listening on port 8080!"))
