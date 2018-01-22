@@ -28,7 +28,10 @@ mongoose.connection.once("open", () => console.log("Connected to mongodb"))
 // Define a model here.
 // User Model:
 const User = mongoose.model("User", {
-  id: Number,
+  userId: {
+    type: String,
+    default: () => uuid()
+  },
   email: {
     type: String,
     required: true
@@ -52,7 +55,7 @@ const User = mongoose.model("User", {
 })
 // Event info model:
 const eventInfo = mongoose.model("eventInfo", {
-  id: Number,
+  userId: String,
   title: {
     type: String,
     required: true
@@ -85,6 +88,7 @@ app.post("/signup", (req, res) => {
   const hash = bcrypt.hashSync(password)
 
   const user = new User(req.body)
+  user.password = bcrypt.hashSync(user.password)
 
   user.save()
   .then(() => { res.status(201).json({answer: "User created"}) })
@@ -99,15 +103,16 @@ app.get("/signup", (req, res) => {
 //Login part:
 
 const findUser = (req, res, next) => {
-  User.findById(req.params.id).then(user => {
+  User.findById(req.params.userId).then(user => {
     if (user.accessToken === req.headers.token) {
-      req.user = user
+      req.email = user.email
       next()
     } else {
       res.status(401).send("Unauthenticated")
     }
  })
 }
+app.use("/user/:userId", findUser)
 
 app.get("/login", (req, res) => {
   User.find().then(allUsers => {
@@ -118,10 +123,10 @@ app.get("/login", (req, res) => {
 app.post("/login", (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
     if (bcrypt.compareSync(req.body.password, user.password)) {
-      res.json({
+      res.status(200).json({
         message: "Welcome!",
         accessToken: user.token,
-        id: user.id
+        id: user.userId
       })
     } else {
       res.status(401).json({ message: "Authentication failed" })
