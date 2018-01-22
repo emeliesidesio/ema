@@ -45,25 +45,24 @@ export default class Login extends React.Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.state)
-    }).then(json => {
-      console.log(json)
-    })
-    this.setState({
-      email: "",
-      password: "",
-      firstname: "",
-      lastname: ""
-    })
+    }).then(response => (
+      this.setState({
+        email: "",
+        password: "",
+        firstname: "",
+        lastname: ""
+      }, () => { console.log("State has been reset", response, response.status) })
+    ))
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit} className="login-form">
+        {/* <form onSubmit={this.handleSubmit} className="login-form">
           <div>Email<input type="email" value={this.state.email} onChange={this.handleEmail} required /></div>
           <div>Password<input type="password" value={this.state.password} onChange={this.handlePassword} required /></div>
           <button type="submit">Log in</button>
-        </form>
+        </form> */}
         <form onSubmit={this.handleSubmit} className="signup-form">
           <div>First name<input type="text" value={this.state.firstname} onChange={this.handleFirstName} required /></div>
           <div>Last name<input type="text" value={this.state.lastname} onChange={this.handleLastName} required /></div>
