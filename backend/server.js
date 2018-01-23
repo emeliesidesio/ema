@@ -65,11 +65,12 @@ const EventInfo = mongoose.model("eventInfo", {
     type: String,
     required: true
   },
+  guestPassword: String,
   attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Guest" }]
 })
 
 const Guest = mongoose.model("guest", {
-  event: { type: mongoose.Schema.Types.ObjectId, ref: "EventInfo" },
+  eventId: { type: mongoose.Schema.Types.ObjectId, ref: "EventInfo" },
   firstName: String,
   lastName: String,
   email: String,
@@ -95,10 +96,24 @@ app.get("/events/:eventId/guests", (req, res) => {
 
 // create event:
 app.post("/events", (req, res) => {
-  const event = new EventInfo(req.body)
+  const event = new EventInfo({
+    title: req.body.title,
+    date: req.body.date,
+    location: req.body.location,
+    description: req.body.description,
+    guestPassword: req.body.guestPassword
+  })
 
   event.save()
-  .then(() => { res.status(201).json({answer: "Event created"}) })
+  .then(() => {
+    const guestList = req.body.attendees.map(attendee => {
+      const guest = new Guest({ email: attendee.email, eventId: event._id })
+      return guest.save()
+    })
+    return Promise.all(guestList)
+  }).then(() => {
+    res.status(201).json({answer: "Event created"})
+  })
   .catch(err => { res.status(401).json(err) })
 })
 

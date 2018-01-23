@@ -9,9 +9,8 @@ export default class CreateEvent extends React.Component {
       date: "",
       location: "",
       description: "",
-      attendees: [{
-        email: ""
-      }],
+      email: "",
+      attendees: [],
       guestPassword: ""
     }
   }
@@ -40,11 +39,26 @@ export default class CreateEvent extends React.Component {
     })
   }
 
-  handleAttendees = event => {
+  addInvite = event => {
     this.setState({
-      attendees: event.target.value
+      email: event.target.value
     })
   }
+
+  addEmailtoAttendeeList = event => {
+    event.preventDefault()
+    const guest = {email: this.state.email}
+    this.setState({
+      attendees: [guest, ...this.state.attendees]
+    }), this.setState({
+      email: ""
+    })
+  }
+  // handleAttendees = event => {
+  //   this.setState({
+  //     attendees: event.target.value
+  //   })
+  // }
 
   handleGuestPassword = event => {
     this.setState({
@@ -67,6 +81,7 @@ export default class CreateEvent extends React.Component {
         date: "",
         location: "",
         description: "",
+        attendees: "",
         guestPassword: ""
       }, () => { console.log("State has been reset", response, response.status) })
     ))
@@ -81,7 +96,8 @@ export default class CreateEvent extends React.Component {
           <div>Date<input type="date" value={this.state.date} onChange={this.handleDate} required /></div>
           <div>Location<input type="text" value={this.state.location} onChange={this.handleLocation} required /></div>
           <div>Password<input type="text" value={this.state.guestPassword} onChange={this.handleGuestPassword} required /></div>
-          <div>Invite<input type="email" multiple value={this.state.attendees.email} onChange={this.handleAttendees} required /></div>
+          <div>Invite<input type="email" value={this.state.email} onChange={this.addInvite} />
+          <button onClick={this.addEmailtoAttendeeList}>Add person</button></div>
           <button type="submit">Create event</button>
         </form>
       </div>
