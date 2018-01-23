@@ -1,6 +1,6 @@
 import React from "react"
 
-export default class Login extends React.Component {
+export default class Signup extends React.Component {
 
   constructor(props) {
     super(props)
@@ -58,11 +58,6 @@ export default class Login extends React.Component {
   render() {
     return (
       <div>
-        {/* <form onSubmit={this.handleSubmit} className="login-form">
-          <div>Email<input type="email" value={this.state.email} onChange={this.handleEmail} required /></div>
-          <div>Password<input type="password" value={this.state.password} onChange={this.handlePassword} required /></div>
-          <button type="submit">Log in</button>
-        </form> */}
         <form onSubmit={this.handleSubmit} className="signup-form">
           <div>First name<input type="text" value={this.state.firstname} onChange={this.handleFirstName} required /></div>
           <div>Last name<input type="text" value={this.state.lastname} onChange={this.handleLastName} required /></div>
