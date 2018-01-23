@@ -61,10 +61,28 @@ const EventInfo = mongoose.model("eventInfo", {
     type: String,
     required: true
   },
-  guest: {
-    name: String,
-    attending: Boolean
-  }
+  guests: [{ type: mongoose.Schema.Types.ObjectId, ref: "Guest" }]
+})
+
+const Guest = mongoose.model("guest", {
+  name: String,
+  attending: Boolean,
+  comment: String
+})
+
+// create event:
+app.post("/create-event", (req, res) => {
+  const event = new EventInfo(req.body)
+
+  event.save()
+  .then(() => { res.status(201).json({answer: "Event created"}) })
+  .catch(err => { res.status(401).json(err) })
+})
+
+app.get("/create-event", (req, res) => {
+  EventInfo.find().then(allEvents => {
+    res.json(allEvents)
+  })
 })
 
 // signup part:

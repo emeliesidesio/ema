@@ -1,7 +1,9 @@
 import React from "react"
-import { BrowserRouter, Route, Link } from "react-router-dom"
+import { BrowserRouter, Route } from "react-router-dom"
 import Home from "pages/home"
 import Account from "pages/account"
+import Dashboard from "pages/dashboard"
+import CreateEvent from "pages/create-event"
 
 class App extends React.Component {
 
@@ -12,7 +14,8 @@ class App extends React.Component {
           <div>
             <Route exact path="/" component={Home} />
             <Route exact path="/account" component={Account} />
-            <Link to="/account">Login / Signup</Link>
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/create-event" component={CreateEvent} />
           </div>
         </BrowserRouter>
       </div>
