@@ -7,8 +7,8 @@ export default class Signup extends React.Component {
     this.state = {
       email: "",
       password: "",
-      firstname: "",
-      lastname: ""
+      firstName: "",
+      lastName: ""
     }
   }
 
@@ -26,13 +26,13 @@ export default class Signup extends React.Component {
 
   handleFirstName = event => {
     this.setState({
-      firstname: event.target.value
+      firstName: event.target.value
     })
   }
 
   handleLastName = event => {
     this.setState({
-      lastname: event.target.value
+      lastName: event.target.value
     })
   }
 
@@ -49,8 +49,8 @@ export default class Signup extends React.Component {
       this.setState({
         email: "",
         password: "",
-        firstname: "",
-        lastname: ""
+        firstName: "",
+        lastName: ""
       }, () => { console.log("State has been reset", response, response.status) })
     ))
   }
@@ -59,8 +59,8 @@ export default class Signup extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="signup-form">
-          <div>First name<input type="text" value={this.state.firstname} onChange={this.handleFirstName} required /></div>
-          <div>Last name<input type="text" value={this.state.lastname} onChange={this.handleLastName} required /></div>
+          <div>First name<input type="text" value={this.state.firstName} onChange={this.handleFirstName} required /></div>
+          <div>Last name<input type="text" value={this.state.lastName} onChange={this.handleLastName} required /></div>
           <div>Email<input type="email" value={this.state.email} onChange={this.handleEmail} required /></div>
           <div>Password<input type="password" value={this.state.password} onChange={this.handlePassword} required /></div>
           <button type="submit">Sign up</button>
