@@ -61,17 +61,40 @@ const EventInfo = mongoose.model("eventInfo", {
     type: String,
     required: true
   },
-  guests: [{ type: mongoose.Schema.Types.ObjectId, ref: "Guest" }]
+  description: {
+    type: String,
+    required: true
+  },
+  attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Guest" }]
 })
 
 const Guest = mongoose.model("guest", {
-  name: String,
+  event: { type: mongoose.Schema.Types.ObjectId, ref: "EventInfo" },
+  firstName: String,
+  lastName: String,
+  email: String,
   attending: Boolean,
-  comment: String
+  comment: String,
+  passwordToken: String
+})
+
+// add guest:
+app.post("/events/:eventId/guests", (req, res) => {
+  const event = new Guest(req.body)
+
+  event.save()
+  .then(() => { res.status(201).json({answer: "Guest added"}) })
+  .catch(err => { res.status(401).json(err) })
+})
+
+app.get("/events/:eventId/guests", (req, res) => {
+  Guest.find().then(allGuests => {
+    res.json(allGuests)
+  })
 })
 
 // create event:
-app.post("/create-event", (req, res) => {
+app.post("/events", (req, res) => {
   const event = new EventInfo(req.body)
 
   event.save()
@@ -79,7 +102,7 @@ app.post("/create-event", (req, res) => {
   .catch(err => { res.status(401).json(err) })
 })
 
-app.get("/create-event", (req, res) => {
+app.get("/events", (req, res) => {
   EventInfo.find().then(allEvents => {
     res.json(allEvents)
   })
@@ -104,7 +127,7 @@ app.get("/signup", (req, res) => {
 // login part:
 app.post("/login", (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
-    if (bcrypt.compareSync(req.body.password, user.password)) {
+    if (user && bcrypt.compareSync(req.body.password, user.password)) {
       res.status(200).json({
         message: "Welcome!",
         accessToken: user.token

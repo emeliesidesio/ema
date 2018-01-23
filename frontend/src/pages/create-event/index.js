@@ -8,10 +8,9 @@ export default class CreateEvent extends React.Component {
       title: "",
       date: "",
       location: "",
-      guests: [{
-        name: "",
-        attending: false,
-        comment: ""
+      description: "",
+      attendees: [{
+        email: ""
       }],
       guestPassword: ""
     }
@@ -20,6 +19,12 @@ export default class CreateEvent extends React.Component {
   handleTitle = event => {
     this.setState({
       title: event.target.value
+    })
+  }
+
+  handleDescription = event => {
+    this.setState({
+      description: event.target.value
     })
   }
 
@@ -35,9 +40,9 @@ export default class CreateEvent extends React.Component {
     })
   }
 
-  handleGuests = event => {
+  handleAttendees = event => {
     this.setState({
-      guests: event.target.value
+      attendees: event.target.value
     })
   }
 
@@ -49,7 +54,7 @@ export default class CreateEvent extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    fetch("http://localhost:8080/create-event", {
+    fetch("http://localhost:8080/events", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -61,7 +66,7 @@ export default class CreateEvent extends React.Component {
         title: "",
         date: "",
         location: "",
-        guests: "",
+        description: "",
         guestPassword: ""
       }, () => { console.log("State has been reset", response, response.status) })
     ))
@@ -72,10 +77,11 @@ export default class CreateEvent extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit} className="login-form">
           <div>Title<input type="text" value={this.state.title} onChange={this.handleTitle} required /></div>
+          <div>Description<input type="text" value={this.state.description} onChange={this.handleDescription} required /></div>
           <div>Date<input type="date" value={this.state.date} onChange={this.handleDate} required /></div>
           <div>Location<input type="text" value={this.state.location} onChange={this.handleLocation} required /></div>
           <div>Password<input type="text" value={this.state.guestPassword} onChange={this.handleGuestPassword} required /></div>
-          <div>Invite<input type="email" multiple value={this.state.guests} onChange={this.handleGuests} required /></div>
+          <div>Invite<input type="email" multiple value={this.state.attendees.email} onChange={this.handleAttendees} required /></div>
           <button type="submit">Create event</button>
         </form>
       </div>
