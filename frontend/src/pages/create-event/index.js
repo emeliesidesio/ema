@@ -1,4 +1,5 @@
 import React from "react"
+import Guest from "./../../components/guest/guest"
 
 export default class CreateEvent extends React.Component {
 
@@ -49,8 +50,7 @@ export default class CreateEvent extends React.Component {
     event.preventDefault()
     const guest = {email: this.state.email}
     this.setState({
-      attendees: [guest, ...this.state.attendees]
-    }), this.setState({
+      attendees: [guest, ...this.state.attendees],
       email: ""
     })
   }
@@ -87,6 +87,30 @@ export default class CreateEvent extends React.Component {
     ))
   }
 
+  handleRemove = id => {
+    fetch(`http://localhost:8080/events/${this.props.eventId}/guests`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json, text/plain, */*",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(this.props.id)
+      })
+
+    // const newGuestList = [...this.state.attendees]
+    // newGuestList.splice(id, 1)
+    // this.setState({
+    //   attendees: newGuestList
+    // }
+
+    console.log(id)
+
+    this.setState(prevState => ({
+      attendees: prevState.attendees.splice(id, 1)
+    }))
+
+  }
+
   render() {
     return (
       <div>
@@ -100,6 +124,16 @@ export default class CreateEvent extends React.Component {
           <button onClick={this.addEmailtoAttendeeList}>Add person</button></div>
           <button type="submit">Create event</button>
         </form>
+        <h2>My invited guests</h2>
+        {this.state.attendees.length > 0 ?
+        this.state.attendees.map((attendee, index) => {
+          return <Guest
+            id={attendee._id}
+            index={index}
+            eventId={attendee.eventId}
+            email={attendee.email}
+            handleRemove={this.handleRemove} />
+        }) : <p>Guestlist is empty</p>}
       </div>
     )
   }

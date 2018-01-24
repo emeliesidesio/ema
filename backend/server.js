@@ -94,6 +94,13 @@ app.get("/events/:eventId/guests", (req, res) => {
   })
 })
 
+app.put("events/:eventId/guests", (req, res) => {
+  const condition = { _id: req.params.eventId }
+  Guest.remove(condition, req.body)
+  .then(() => { res.status(201).send("Guest removed from database") })
+  .catch(err => { res.status(400).send(err) })
+})
+
 // create event:
 app.post("/events", (req, res) => {
   const event = new EventInfo({
