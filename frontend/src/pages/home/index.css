@@ -1,0 +1,23 @@
+.start-page {
+  width: 100%;
+  height: 700px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-position: center center;
+}
+
+.copy-container {
+  text-align: center;
+  width: 40vw;
+  margin: 0 auto 50px auto;
+}
+
+.copy-container h1 {
+  margin-bottom: 25px;
+}
+
+.CTA-container {
+  display: flex;
+  justify-content: center;
+}
