@@ -124,11 +124,18 @@ app.post("/events", (req, res) => {
   .catch(err => { res.status(401).json(err) })
 })
 
-app.get("/events", (req, res) => {
+app.get("/events/", (req, res) => {
   EventInfo.find().then(allEvents => {
     res.json(allEvents)
   })
 })
+
+// app.get("/events/:_id", (req, res) => {
+//   EventInfo.findOne( { _id: req.params.id }).then(event => {
+//     res.json(event)
+//     console.log(event)
+//   })
+// })
 
 // signup part:
 app.post("/signup", (req, res) => {

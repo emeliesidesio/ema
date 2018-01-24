@@ -12,9 +12,26 @@ export default class CreateEvent extends React.Component {
       description: "",
       email: "",
       attendees: [],
-      guestPassword: ""
+      guestPassword: "",
+      previewEvent: ""
     }
   }
+
+  handlePreviewEvent = _id => {
+  fetch(`http://localhost:8080/events/${_id}`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json"
+    }
+  }).then(response => (
+    response.json()
+  )).then(json => {
+    this.setState({ previewEvent: json })
+  })
+  console.log("Eventinfo for preview", this.state.previewEvent)
+  }
+
 
   handleTitle = event => {
     this.setState({
@@ -87,29 +104,29 @@ export default class CreateEvent extends React.Component {
     ))
   }
 
-  handleRemove = id => {
-    fetch(`http://localhost:8080/events/${this.props.eventId}/guests`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json, text/plain, */*",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(this.props.id)
-      })
-
-    // const newGuestList = [...this.state.attendees]
-    // newGuestList.splice(id, 1)
-    // this.setState({
-    //   attendees: newGuestList
-    // }
-
-    console.log(id)
-
-    this.setState(prevState => ({
-      attendees: prevState.attendees.splice(id, 1)
-    }))
-
-  }
+  // handleRemove = id => {
+  //   fetch(`http://localhost:8080/events/${this.props.eventId}/guests`, {
+  //       method: "PUT",
+  //       headers: {
+  //         Accept: "application/json, text/plain, */*",
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify(this.props.id)
+  //     })
+  //
+  //   // const newGuestList = [...this.state.attendees]
+  //   // newGuestList.splice(id, 1)
+  //   // this.setState({
+  //   //   attendees: newGuestList
+  //   // }
+  //
+  //   console.log(id)
+  //
+  //   this.setState(prevState => ({
+  //     attendees: prevState.attendees.splice(id, 1)
+  //   }))
+  //
+  // }
 
   render() {
     return (
@@ -124,7 +141,9 @@ export default class CreateEvent extends React.Component {
           <button onClick={this.addEmailtoAttendeeList}>Add person</button></div>
           <button type="submit">Create event</button>
         </form>
-        <h2>My invited guests</h2>
+        <button onClick={this.handlePreviewEvent}>Visar eventet</button>
+        <div>{this.state.previewEvent}</div>
+        {/* <h2>My invited guests</h2>
         {this.state.attendees.length > 0 ?
         this.state.attendees.map((attendee, index) => {
           return <Guest
@@ -133,7 +152,7 @@ export default class CreateEvent extends React.Component {
             eventId={attendee.eventId}
             email={attendee.email}
             handleRemove={this.handleRemove} />
-        }) : <p>Guestlist is empty</p>}
+        }) : <p>Guestlist is empty</p>} */}
       </div>
     )
   }
