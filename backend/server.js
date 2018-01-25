@@ -88,6 +88,7 @@ app.post("/events/:eventId/guests", (req, res) => {
   .catch(err => { res.status(401).json(err) })
 })
 
+//VI MÅSTE MATCH MOT eventId för att få fram endast gästerna till specifikt event
 app.get("/events/:eventId/guests", (req, res) => {
   Guest.find().then(allGuests => {
     res.json(allGuests)
