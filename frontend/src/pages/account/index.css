@@ -1,0 +1,11 @@
+body {
+  background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
+}
+
+.account-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

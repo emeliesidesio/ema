@@ -1,4 +1,5 @@
 import React from "react"
+import "./index.css"
 
 export default class Signup extends React.Component {
 
@@ -59,10 +60,11 @@ export default class Signup extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="signup-form">
-          <div>First name<input type="text" value={this.state.firstName} onChange={this.handleFirstName} required /></div>
-          <div>Last name<input type="text" value={this.state.lastName} onChange={this.handleLastName} required /></div>
-          <div>Email<input type="email" value={this.state.email} onChange={this.handleEmail} required /></div>
-          <div>Password<input type="password" value={this.state.password} onChange={this.handlePassword} required /></div>
+          <p>Not a member yet? Sign up here:</p>
+          <div><input type="text" value={this.state.firstName} onChange={this.handleFirstName} required placeholder="First name"/></div>
+          <div><input type="text" value={this.state.lastName} onChange={this.handleLastName} required placeholder="Last name" /></div>
+          <div><input type="email" value={this.state.email} onChange={this.handleEmail} required placeholder="Email" /></div>
+          <div><input type="password" value={this.state.password} onChange={this.handlePassword} required placeholder="Password" /></div>
           <button type="submit">Sign up</button>
         </form>
       </div>

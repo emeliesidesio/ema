@@ -7,8 +7,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Fira Sans", sans-serif;
-  color: white;
+  font-family: "Helvetica", sans-serif;
+  font-weight: lighter;
 }
 
 h1 {
@@ -16,6 +16,7 @@ h1 {
   font-weight: 700;
   margin: 0;
   padding: 0;
+  font-family: "Fira Sans", sans-serif;
 }
 
 h2 {
@@ -24,11 +25,13 @@ h2 {
   letter-spacing: 0.5px;
   margin: 0;
   padding: 0;
+  font-family: "Fira Sans", sans-serif;
 }
 
 a {
   text-decoration: none;
-  color: white;
+  font-family: "Fira Sans", sans-serif;
+  color: black;
   font-size: 20px;
   letter-spacing: 0.5px;
   font-weight: 300;
@@ -36,8 +39,9 @@ a {
 
 button {
   background: none;
-  border: 1px solid white;
+  border: 1px solid black;
   border-radius: 8px;
   padding: 15px 25px 15px 25px;
   margin-right: 20px;
+  outline: none;
 }

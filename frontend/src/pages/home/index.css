@@ -7,6 +7,18 @@
   background-position: center center;
 }
 
+.start-page h1, h2, a {
+  color: white;
+}
+
+.CTA-container a {
+  color: white;
+}
+
+.start-page button {
+  border: 1px solid white;
+}
+
 .copy-container {
   text-align: center;
   width: 40vw;
