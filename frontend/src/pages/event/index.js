@@ -5,21 +5,13 @@ export default class Event extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      event: "",
       eventInfo: ""
     }
   }
 
-  handleEvent = event => {
-    this.setState({
-      event: event.target.value
-    })
-  }
-
-  showEvent = e => {
-    e.preventDefault()
+  componentDidMount() {
     console.log("Showing event")
-    const eventId = this.state.event
+    const eventId = this.props.match.params.eventId
     fetch(`http://localhost:8080/events/${eventId}`, {
       method: "GET",
       headers: {
@@ -37,10 +29,6 @@ export default class Event extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.showEvent} >
-        <input type="text" value={this.state.value} onChange={this.handleEvent} />
-        <button>Seize your Party</button>
-        </form>
         <p>This is your event</p>
           <div>
             {this.state.eventInfo.title}

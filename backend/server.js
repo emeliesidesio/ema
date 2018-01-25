@@ -4,6 +4,9 @@ import mongoose from "mongoose"
 import cors from "cors"
 import uuid from "uuid/v4"
 import bcrypt from "bcrypt-nodejs"
+import sgMail from "@sendgrid/mail"
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 
 // Express setup, including JSON body parsing.
 const app = express()
@@ -135,6 +138,25 @@ app.get("/events/:_id", (req, res) => {
   EventInfo.findOne().then(event => {
     res.json(event)
   })
+})
+
+const sendMail = (to, subject, text) => {
+  const msg = {
+    to: to,
+    from: 'seizetheparty@example.com',
+    subject: subject,
+    html: text,
+  }
+  sgMail.send(msg)
+}
+
+app.post("/events/:eventId/send_emails", (req, res) => {
+  Guest.find({eventId: req.params.eventId }).then(eventGuests => {
+    eventGuests.map(guest => {
+      sendMail(guest.email, "test", "välkommen")
+    })
+  })
+  res.status(200).json({ answer: "emails sent" })
 })
 
 // app.get("/events/:_id", (req, res) => {
