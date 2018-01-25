@@ -1,0 +1,27 @@
+.login-form {
+  background: white;
+  box-shadow: 5px 5px 10px grey;
+  width: 550px;
+  height: 550px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid grey;
+  outline: none;
+  font-size: 16px;
+  font-weight: lighter;
+  width: 320px;
+  margin-top: 30px;
+}
+
+.login-form button {
+  font-size: 16px;
+  margin-top: 40px;
+}

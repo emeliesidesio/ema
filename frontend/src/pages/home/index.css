@@ -5,6 +5,7 @@
   justify-content: center;
   flex-direction: column;
   background-position: center center;
+  background-repeat: no-repeat;
 }
 
 .start-page h1, h2, a {
