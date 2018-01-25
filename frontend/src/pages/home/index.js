@@ -14,7 +14,7 @@ export default class Home extends React.Component {
         </div>
         <div className="CTA-container">
           <button><Link to="/account">Create event</Link></button>
-          <button><Link to="/event">RSVP</Link></button>
+          <button><Link to="/account">Login</Link></button>
         </div>
       </div>
     )
