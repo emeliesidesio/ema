@@ -88,19 +88,19 @@ app.post("/events/:eventId/guests", (req, res) => {
   .catch(err => { res.status(401).json(err) })
 })
 
-//VI MÅSTE MATCH MOT eventId för att få fram endast gästerna till specifikt event
+//VI MÅSTE MATCH MOT eventId för att få fram endast gästerna till specifik
 app.get("/events/:eventId/guests", (req, res) => {
-  Guest.find().then(allGuests => {
-    res.json(allGuests)
+  Guest.find({eventId: req.params.eventId }).then(eventGuests => {
+    res.json(eventGuests)
   })
 })
 
-app.put("events/:eventId/guests", (req, res) => {
-  const condition = { _id: req.params.eventId }
-  Guest.remove(condition, req.body)
-  .then(() => { res.status(201).send("Guest removed from database") })
-  .catch(err => { res.status(400).send(err) })
-})
+// app.put("events/:eventId/guests", (req, res) => {
+//   const condition = { _id: req.params.eventId }
+//   Guest.remove(condition, req.body)
+//   .then(() => { res.status(201).send("Guest removed from database") })
+//   .catch(err => { res.status(400).send(err) })
+// })
 
 // create event:
 app.post("/events", (req, res) => {

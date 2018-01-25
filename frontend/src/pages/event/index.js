@@ -16,39 +16,23 @@ export default class Event extends React.Component {
     })
   }
 
-  // showEvent = _id => {
-  //   fetch(`http://localhost:8080/events/${_id}`, {
-  //     method: "GET",
-  //     headers: {
-  //       Accept: "application/json, text/plain, */*",
-  //       "Content-Type": "application/json"
-  //     }
-  //   }).then(response => {
-  //     return response.json()
-  //   }).then(json => {
-  //     const eventMatch = json.find(item => {
-  //       item._id === this.state.event
-  //       console.log("eventet", eventMatch)
-  //     })
-  //     this.setState({
-  //       eventInfo: eventMatch
-  //     })
-  //   })
-  // }
-
-  // componentWillMount() {
-  //   fetch("http://localhost:8080/events/").then(response => (
-  //     response.json()
-  //   )).then(json => {
-  //     const eventMatch = json.find(item => (
-  //       item._id === this.state.event
-  //       // {this.props.match.params._id}
-  //     ))
-  //     this.setState({ eventInfo: eventMatch })
-  //   }, () => {
-  //     console.log( "eventet", this.state.eventInfo)
-  //   })
-  // }
+  showEvent = e => {
+    e.preventDefault()
+    console.log("Showing event")
+    const eventId = this.state.event
+    fetch(`http://localhost:8080/events/${eventId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json"
+      }
+    }).then(response => {
+      return response.json()
+    }).then(json => {
+      this.setState({
+        eventInfo: json
+      })
+    })
+  }
 
   render() {
     return (
