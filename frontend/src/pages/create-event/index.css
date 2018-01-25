@@ -1,4 +1,4 @@
-.login-form {
+.create-form {
   background: white;
   box-shadow: 5px 5px 10px grey;
   width: 550px;
@@ -21,7 +21,7 @@ input {
   margin-top: 30px;
 }
 
-.login-form button {
+.create-form button {
   font-size: 16px;
   margin-top: 40px;
 }

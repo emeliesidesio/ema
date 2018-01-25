@@ -109,9 +109,9 @@ app.post("/events", (req, res) => {
 
   event.save()
   .then(() => {
-    const guestList = req.body.attendees.map(attendee => {
-      const guest = new Guest({ email: attendee.email, eventId: event._id })
-      return guest.save()
+    const guestList = req.body.guests.map(guest => {
+      const oneGuest = new Guest({ email: guest.email, eventId: event._id })
+      return oneGuest.save()
     })
     return Promise.all(guestList)
   }).then(() => {
