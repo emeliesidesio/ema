@@ -1,5 +1,6 @@
 import React from "react"
 import Guest from "./../../components/guest/guest"
+import "./index.css"
 
 export default class CreateEvent extends React.Component {
 
@@ -132,13 +133,15 @@ export default class CreateEvent extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="login-form">
-          <div>Title<input type="text" value={this.state.title} onChange={this.handleTitle} required /></div>
-          <div>Description<input type="text" value={this.state.description} onChange={this.handleDescription} required /></div>
-          <div>Date<input type="date" value={this.state.date} onChange={this.handleDate} required /></div>
-          <div>Location<input type="text" value={this.state.location} onChange={this.handleLocation} required /></div>
-          <div>Password<input type="text" value={this.state.guestPassword} onChange={this.handleGuestPassword} required /></div>
-          <div>Invite<input type="email" value={this.state.email} onChange={this.addInvite} />
-          <button onClick={this.addEmailtoAttendeeList}>Add person</button></div>
+          <div><input type="text" value={this.state.title} onChange={this.handleTitle} required placeholder="Title" /></div>
+          <div><input type="text" value={this.state.description} onChange={this.handleDescription} required placeholder="Description" /></div>
+          <div><input type="date" value={this.state.date} onChange={this.handleDate} required placeholder="Date" /></div>
+          <div><input type="text" value={this.state.location} onChange={this.handleLocation} required placeholder="Location" /></div>
+          <div><input type="text" value={this.state.guestPassword} onChange={this.handleGuestPassword} required placeholder="Password" /></div>
+          <div>
+            <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Invite" />
+            <button onClick={this.addEmailtoAttendeeList}>Add person</button>
+          </div>
           <button type="submit">Create event</button>
         </form>
         <button onClick={this.handlePreviewEvent}>Visar eventet</button>
