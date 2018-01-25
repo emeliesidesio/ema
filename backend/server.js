@@ -130,6 +130,12 @@ app.get("/events/", (req, res) => {
   })
 })
 
+app.get("/events/:_id", (req, res) => {
+  EventInfo.findOne().then(event => {
+    res.json(event)
+  })
+})
+
 // app.get("/events/:_id", (req, res) => {
 //   EventInfo.findOne( { _id: req.params.id }).then(event => {
 //     res.json(event)
