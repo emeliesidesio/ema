@@ -112,9 +112,9 @@ class CreateEvent extends React.Component {
               chooseBackground={this.handleBackground} />
             ))}
           </select>
-          <div>
-            <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Invite" />
-            <button onClick={this.addEmailtoGuestList}>Add person</button>
+          <div className="add-guest">
+            <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
+            <button onClick={this.addEmailtoGuestList}>Add</button>
           </div>
           <button type="submit">Create event</button>
             <div className="message">
