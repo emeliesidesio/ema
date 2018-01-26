@@ -10,10 +10,11 @@ export default class Guest extends React.Component {
     return (
       <div>
         <p>{this.props.email}</p>
-          <button
-            className="remove"
-            type="button"
-            onClick={this.onClickRemove}>Remove guest</button>
+        <button
+          className="remove"
+          type="button"
+          onClick={this.onClickRemove}>Remove guest
+        </button>
       </div>
     )
   }

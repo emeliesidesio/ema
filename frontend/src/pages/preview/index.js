@@ -28,16 +28,17 @@ export default class Preview extends React.Component {
   }
 
   render() {
-  return (
-    <div>
-      Preview
-  {this.state.guestList.map(guest => {
     return (
-    <Guest
-    key={guest._id}
-    email={guest.email} />
-  )})}
-    </div>
-  )
-}
+      <div>
+        Preview
+        {this.state.guestList.map(guest => {
+          return (
+            <Guest
+              key={guest._id}
+              email={guest.email} />
+          )
+        })}
+      </div>
+    )
+  }
 }
