@@ -1,4 +1,6 @@
 import React from "react"
+import Background from "assets/images"
+import ChooseBackground from "components/choose-background/choose-background"
 import Guest from "./../../components/guest/guest"
 import "./index.css"
 
@@ -14,6 +16,7 @@ export default class CreateEvent extends React.Component {
       email: "",
       guests: [],
       time: "",
+      backgroundImage: "",
       previewEvent: ""
     }
   }
@@ -64,6 +67,12 @@ export default class CreateEvent extends React.Component {
     })
   }
 
+  handleBackground = event => {
+    this.setState({
+      backgroundImage: event.target.value
+    })
+  }
+
   addEmailtoGuestList = event => {
     event.preventDefault()
     const guest = {email: this.state.email}
@@ -94,7 +103,8 @@ export default class CreateEvent extends React.Component {
         date: "",
         location: "",
         description: "",
-        attendees: "",
+        guests: "",
+        backgroundImage: "",
         time: ""
       }, () => { console.log("State has been reset", response, response.status) })
     ))
@@ -102,13 +112,23 @@ export default class CreateEvent extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="create-event-page" style={{ backgroundImage: `url(${this.state.backgroundImage})` }}>
         <form onSubmit={this.handleSubmit} className="create-form">
           <div><input type="text" value={this.state.title} onChange={this.handleTitle} required placeholder="Title" /></div>
           <div><input type="text" value={this.state.description} onChange={this.handleDescription} required placeholder="Description" /></div>
           <div><input type="date" value={this.state.date} onChange={this.handleDate} required placeholder="Date" /></div>
           <div><input type="time" value={this.state.time} onChange={this.handleTime} required placeholder="Time" /></div>
           <div><input type="text" value={this.state.location} onChange={this.handleLocation} required placeholder="Location" /></div>
+          <select className="scroll-background" onChange={this.handleBackground}>
+            <option>Choose theme</option>
+            {Background.map(background => (
+            <ChooseBackground
+              key={background.id}
+              image={background.image}
+              name={background.name}
+              chooseBackground={this.handleBackground} />
+            ))}
+          </select>
           <div>
             <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Invite" />
             <button onClick={this.addEmailtoGuestList}>Add person</button>
