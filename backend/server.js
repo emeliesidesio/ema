@@ -136,7 +136,7 @@ app.post("/events", (req, res) => {
     })
     return Promise.all(guestList)
   }).then(() => {
-    res.status(201).json({answer: "Event created"})
+    res.status(201).json({answer: "Event created" })
   })
   .catch(err => { res.status(401).json(err) })
 })
