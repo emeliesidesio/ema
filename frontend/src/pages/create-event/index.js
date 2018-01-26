@@ -1,10 +1,11 @@
 import React from "react"
+import { withRouter } from "react-router-dom"
 import Background from "assets/images"
 import ChooseBackground from "components/choose-background/choose-background"
 import Guest from "./../../components/guest/guest"
 import "./index.css"
 
-export default class CreateEvent extends React.Component {
+class CreateEvent extends React.Component {
 
   constructor(props) {
     super(props)
@@ -17,7 +18,7 @@ export default class CreateEvent extends React.Component {
       guests: [],
       time: "",
       backgroundImage: "",
-      emailGuest: ""
+      message: ""
     }
   }
 
@@ -77,43 +78,21 @@ export default class CreateEvent extends React.Component {
     fetch("http://localhost:8080/events", {
       method: "POST",
       headers: {
-        Accept: "application/json, text/plain, */*",
+        Accept: "application/json",
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.state)
-    }).then(response => (
-      response.json()
-    )).then(json => {
-      console.log("hej")
-      this.setState({ id: json._id })
-    })
-      // this.setState ({
-      //   title: "",
-      //   date: "",
-      //   location: "",
-      //   description: "",
-      //   guests: "",
-      //   backgroundImage: "",
-      //   time: ""
-      // }, () => { console.log("State has been reset") })
+    }).then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        this.setState({ message: "Event was not created"})
     }
-
-  // handleEmailGuest =
-  //
-  //   handlePreviewEvent = _id => {
-  //   fetch(`http://localhost:8080/events/${_id}`, {
-  //     method: "GET",
-  //     headers: {
-  //       Accept: "application/json, text/plain, */*",
-  //       "Content-Type": "application/json"
-  //     }
-  //   }).then(response => (
-  //     response.json()
-  //   )).then(json => {
-  //     this.setState({ previewEvent: json })
-  //   })
-  //   console.log("Eventinfo for preview", this.state.previewEvent)
-  //   }
+    }).then(json => {
+        this.props.history.push(`/create-event/${json._id}`)
+        console.log(json._id)
+})
+    }
 
   render() {
     return (
@@ -139,8 +118,13 @@ export default class CreateEvent extends React.Component {
             <button onClick={this.addEmailtoGuestList}>Add</button>
           </div>
           <button type="submit">Create event</button>
+            <div className="message">
+              {this.state.message}
+            </div>
         </form>
       </div>
     )
   }
 }
+
+export default withRouter(CreateEvent)
