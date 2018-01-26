@@ -138,11 +138,6 @@ app.post("/events", (req, res) => {
     }).then(() => {
       res.status(201).json(event)
     })
-    return Promise.all(guestList)
-  }).then(() => {
-    res.status(201).json(event)
-  })
-
 })
 
 app.get("/events/", (req, res) => {
@@ -158,7 +153,7 @@ app.get("/events/:_id", (req, res) => {
 })
 
 // send emails
-const sendMail = (to, subject, text) => {
+const sendMail = (to, text) => {
   const msg = {
     to: to,
     from: "seizetheparty@example.com",
@@ -171,7 +166,9 @@ const sendMail = (to, subject, text) => {
 app.post("/events/:eventId/send_emails", (req, res) => {
   Guest.find({ eventId: req.params.eventId }).then(eventGuests => {
     eventGuests.map(guest => {
-      sendMail(guest.email, "You're invited!", "välkommen")
+      const url = `www.seizetheparty.io/${guest.eventId}/guests/${guest._id}`
+      const emailMessage = `Hi, you are invited to a party! RSVP here: ${url}`
+      sendMail(guest.email, emailMessage)
     })
   })
   res.status(200).json({ answer: "emails sent" })

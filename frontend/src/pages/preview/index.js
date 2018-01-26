@@ -5,7 +5,9 @@ export default class Preview extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      guestList: []
+      guestList: [],
+      to: "",
+      text: ""
     }
   }
 
@@ -27,9 +29,6 @@ export default class Preview extends React.Component {
     })
   }
 
-  handleInvite = () => {
-    
-  }
   render() {
     return (
       <div>
