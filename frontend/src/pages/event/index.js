@@ -13,7 +13,7 @@ export default class Event extends React.Component {
   }
 
   componentDidMount() {
-    const eventId = this.props.match.params.eventId
+    const { eventId } = this.props.match.params
     fetch(`http://localhost:8080/events/${eventId}`, {
       method: "GET",
       headers: {
@@ -33,8 +33,8 @@ export default class Event extends React.Component {
     this.setState({
       reply: event.target.value
     }, () => {
-      const eventId = this.props.match.params.eventId
-      const _id = this.props.match.params._id
+      const { eventId } = this.props.match.params
+      const { _id } = this.props.match.params
       fetch(`http://localhost:8080/events/${eventId}/guests/${_id}`, {
         method: "PUT",
         headers: {
@@ -47,21 +47,21 @@ export default class Event extends React.Component {
   }
 
   render() {
-    const date = this.state.eventInfo.date
+    const { date } = this.state.eventInfo
     const formattedData = moment(date).format("dddd MMM Do YY")
     return (
       <div className="event-page" style={{ backgroundImage: `url(${this.state.eventInfo.backgroundImage})` }}>
-          <div className="copy-container">
-            <h1>{this.state.eventInfo.title}</h1>
-            <h2>{this.state.eventInfo.description}</h2>
-            <h2>{formattedData}</h2>
-            <h2>{this.state.eventInfo.time}</h2>
-            <h2>{this.state.eventInfo.location}</h2>
-          </div>
-          <div className="CTA-container">
-            <button value="Yes" onClick={this.handleRSVP}>I'm joining</button>
-            <button value="No" onClick={this.handleRSVP}>I cannot make it</button>
-          </div>
+        <div className="copy-container">
+          <h1>{this.state.eventInfo.title}</h1>
+          <h2>{this.state.eventInfo.description}</h2>
+          <h2>{formattedData}</h2>
+          <h2>{this.state.eventInfo.time}</h2>
+          <h2>{this.state.eventInfo.location}</h2>
+        </div>
+        <div className="CTA-container">
+          <button value="Yes" onClick={this.handleRSVP}>I'm joining</button>
+          <button value="No" onClick={this.handleRSVP}>I cannot make it</button>
+        </div>
       </div>
     )
   }

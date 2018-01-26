@@ -59,7 +59,7 @@ class CreateEvent extends React.Component {
 
   addEmailtoGuestList = event => {
     event.preventDefault()
-    const guest = {email: this.state.email}
+    const guest = { email: this.state.email }
     this.setState({
       guests: [guest, ...this.state.guests],
       email: ""
@@ -85,13 +85,12 @@ class CreateEvent extends React.Component {
       if (response.ok) {
         return response.json()
       } else {
-        this.setState({ message: "Event was not created"})
-    }
+        this.setState({ message: "Event was not created" })
+      }
     }).then(json => {
-        this.props.history.push(`/create-event/${json._id}`)
-        console.log(json._id)
-})
-    }
+      this.props.history.push(`/create-event/${json._id}`)
+    })
+  }
 
   render() {
     return (
@@ -105,11 +104,11 @@ class CreateEvent extends React.Component {
           <select className="scroll-background" onChange={this.handleBackground}>
             <option>Choose theme</option>
             {Background.map(background => (
-            <ChooseBackground
-              key={background.id}
-              image={background.image}
-              name={background.name}
-              chooseBackground={this.handleBackground} />
+              <ChooseBackground
+                key={background.id}
+                image={background.image}
+                name={background.name}
+                chooseBackground={this.handleBackground} />
             ))}
           </select>
           <div className="add-guest">
@@ -117,9 +116,9 @@ class CreateEvent extends React.Component {
             <button onClick={this.addEmailtoGuestList}>Add</button>
           </div>
           <button type="submit">Create event</button>
-            <div className="message">
-              {this.state.message}
-            </div>
+          <div className="message">
+            {this.state.message}
+          </div>
         </form>
       </div>
     )

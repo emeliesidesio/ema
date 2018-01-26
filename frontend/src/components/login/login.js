@@ -8,8 +8,7 @@ class Login extends React.Component {
     super(props)
     this.state = {
       email: "",
-      password: "",
-      message: ""
+      password: ""
     }
   }
 
@@ -40,14 +39,12 @@ class Login extends React.Component {
       } else {
         console.log("Unknown user")
       }
-      this.setState ({
+      this.setState({
         email: "",
         password: ""
       }, () => { console.log("State has been reset", response, response.status) })
     })
   }
-
-     
 
   render() {
     return (
