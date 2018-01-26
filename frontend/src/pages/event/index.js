@@ -1,4 +1,5 @@
 import React from "react"
+import "./index.css"
 
 export default class Event extends React.Component {
 
@@ -28,12 +29,17 @@ export default class Event extends React.Component {
 
   render() {
     return (
-      <div>
-        <p>This is your event</p>
-          <div>
-            {this.state.eventInfo.title}
-            {this.state.eventInfo.date}
-            {this.state.eventInfo.location}
+      <div className="event-page" style={{ backgroundImage: `url(${this.state.eventInfo.backgroundImage})` }}>
+          <div className="copy-container">
+            <h1>{this.state.eventInfo.title}</h1>
+            <h2>{this.state.eventInfo.description}</h2>
+            <h2>{this.state.eventInfo.date}</h2>
+            <h2>{this.state.eventInfo.time}</h2>
+            <h2>{this.state.eventInfo.location}</h2>
+          </div>
+          <div className="CTA-container">
+            <button>I'm Joining</button>
+            <button>I cannot make it</button>
           </div>
       </div>
     )

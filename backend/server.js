@@ -60,7 +60,15 @@ const EventInfo = mongoose.model("eventInfo", {
     type: Date,
     required: true
   },
+  time: {
+    type: String,
+    required: true
+  },
   location: {
+    type: String,
+    required: true
+  },
+  backgroundImage: {
     type: String,
     required: true
   },
@@ -68,8 +76,7 @@ const EventInfo = mongoose.model("eventInfo", {
     type: String,
     required: true
   },
-  guestPassword: String,
-  attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "Guest" }]
+  guests: [{ type: mongoose.Schema.Types.ObjectId, ref: "Guest" }]
 })
 
 const Guest = mongoose.model("guest", {
@@ -77,9 +84,7 @@ const Guest = mongoose.model("guest", {
   firstName: String,
   lastName: String,
   email: String,
-  attending: Boolean,
-  comment: String,
-  passwordToken: String
+  attending: Boolean
 })
 
 // add guest:
@@ -103,8 +108,9 @@ app.post("/events", (req, res) => {
     title: req.body.title,
     date: req.body.date,
     location: req.body.location,
-    description: req.body.description,
-    guestPassword: req.body.guestPassword
+    time: req.body.time,
+    backgroundImage: req.body.backgroundImage,
+    description: req.body.description
   })
 
   event.save()
