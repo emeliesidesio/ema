@@ -77,7 +77,7 @@ export default class CreateEvent extends React.Component {
     event.preventDefault()
     const guest = {email: this.state.email}
     this.setState({
-      guests: [guest, ...this.state.attendees],
+      guests: [guest, ...this.state.guests],
       email: ""
     })
   }
