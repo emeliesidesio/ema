@@ -4,8 +4,30 @@ body {
   padding: 0;
 }
 
-.account-page {
+.login-section {
+  background-color: #a9dac9;
+  width: 100%;
+  height: 680px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+
+.login-section h2 {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: -20px;
+  margin-top: 30px;
+}
+
+.login-section p {
+  font-size: 15px;
+  color: white;
+}
+
+.login-section img {
+  width: 50px;
+  margin-top: 50px;
+  margin-bottom: 10px;
 }

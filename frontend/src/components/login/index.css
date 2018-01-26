@@ -1,6 +1,6 @@
 .login-form {
   background: white;
-  box-shadow: 5px 5px 10px grey;
+  /* box-shadow: 3px 3px 10px black; */
   width: 450px;
   height: 320px;
   display: flex;

@@ -1,5 +1,4 @@
 import React from "react"
-// import { Redirect } from "react-router-dom"
 import { withRouter } from "react-router-dom"
 import "./index.css"
 
@@ -52,8 +51,6 @@ class Login extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="login-form">
-          {/* {this.state.complete && <Redirect to="/dashboard" />} */}
-          <p>Already an account? Sign in here:</p>
           <div><input type="email" value={this.state.email} onChange={this.handleEmail} required placeholder="Email" /></div>
           <div><input type="password" value={this.state.password} onChange={this.handlePassword} required placeholder="Password" /></div>
           <button type="submit">Log in</button>
