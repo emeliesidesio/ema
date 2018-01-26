@@ -2,7 +2,6 @@ import React from "react"
 import { withRouter } from "react-router-dom"
 import Background from "assets/images"
 import ChooseBackground from "components/choose-background/choose-background"
-import Guest from "./../../components/guest/guest"
 import "./index.css"
 
 class CreateEvent extends React.Component {

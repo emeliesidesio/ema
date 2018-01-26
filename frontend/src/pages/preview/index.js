@@ -1,4 +1,5 @@
 import React from "react"
+import Guest from "./../../components/guest/guest"
 
 export default class Preview extends React.Component {
   constructor(props) {
@@ -30,7 +31,12 @@ export default class Preview extends React.Component {
   return (
     <div>
       Preview
-  
+  {this.state.guestList.map(guest => {
+    return (
+    <Guest
+    key={guest._id}
+    email={guest.email} />
+  )})}
     </div>
   )
 }
