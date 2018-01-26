@@ -27,6 +27,9 @@ export default class Preview extends React.Component {
     })
   }
 
+  handleInvite = () => {
+    
+  }
   render() {
     return (
       <div>
@@ -38,6 +41,7 @@ export default class Preview extends React.Component {
               email={guest.email} />
           )
         })}
+        <button type="submit">Send invite</button>
       </div>
     )
   }
