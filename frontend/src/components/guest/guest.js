@@ -1,6 +1,5 @@
 import React from "react"
 
-
 export default class Guest extends React.Component {
 
   onClickRemove = () => {
@@ -15,7 +14,6 @@ export default class Guest extends React.Component {
             className="remove"
             type="button"
             onClick={this.onClickRemove}>Remove guest</button>
-
       </div>
     )
   }
