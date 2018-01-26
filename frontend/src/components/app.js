@@ -5,6 +5,7 @@ import Account from "pages/account"
 import Event from "pages/event"
 import Dashboard from "pages/dashboard"
 import CreateEvent from "pages/create-event"
+import Preview from "pages/preview"
 
 class App extends React.Component {
 
@@ -18,6 +19,7 @@ class App extends React.Component {
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/event/:eventId/guests/:_id" component={Event} />
             <Route exact path="/create-event" component={CreateEvent} />
+            <Route exact path="/create-event/:_id" component={Preview} />
           </div>
         </BrowserRouter>
       </div>
