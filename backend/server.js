@@ -156,7 +156,7 @@ app.get("/events/:_id", (req, res) => {
 const sendMail = (to, text) => {
   const msg = {
     to: to,
-    from: "seizetheparty@example.com",
+    from: "noreply@seizetheparty.io",
     subject: "You're invited!",
     html: text
   }
