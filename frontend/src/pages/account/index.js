@@ -15,7 +15,9 @@ export default class Account extends React.Component {
           <img src={arrowdown} alt=""/>
           <p>Not a member yet? Sign up below</p>
         </div>
-        <Signup />
+        <div className="signup-section" id="signup">
+          <Signup />
+        </div>
       </div>
     )
   }
