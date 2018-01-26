@@ -138,7 +138,7 @@ app.post("/events", (req, res) => {
   }).then(() => {
     res.status(201).json(event)
   })
-  
+
 })
 
 app.get("/events/", (req, res) => {
@@ -158,7 +158,7 @@ const sendMail = (to, subject, text) => {
   const msg = {
     to: to,
     from: 'seizetheparty@example.com',
-    subject: subject,
+    subject: "You're invited!",
     html: text,
   }
   sgMail.send(msg)
@@ -167,7 +167,7 @@ const sendMail = (to, subject, text) => {
 app.post("/events/:eventId/send_emails", (req, res) => {
   Guest.find({eventId: req.params.eventId }).then(eventGuests => {
     eventGuests.map(guest => {
-      sendMail(guest.email, "test", "välkommen")
+      sendMail(guest.email, "You're invited!", "välkommen")
     })
   })
   res.status(200).json({ answer: "emails sent" })
