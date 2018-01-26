@@ -57,7 +57,7 @@ const EventInfo = mongoose.model("eventInfo", {
     required: true
   },
   date: {
-    type: String,
+    type: Date,
     required: true
   },
   time: {

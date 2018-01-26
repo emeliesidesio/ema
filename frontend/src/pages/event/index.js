@@ -1,4 +1,5 @@
 import React from "react"
+import moment from "moment"
 import "./index.css"
 
 export default class Event extends React.Component {
@@ -46,12 +47,14 @@ export default class Event extends React.Component {
   }
 
   render() {
+    const date = this.state.eventInfo.date
+    const formattedData = moment(date).format("dddd MMM Do YY")
     return (
       <div className="event-page" style={{ backgroundImage: `url(${this.state.eventInfo.backgroundImage})` }}>
           <div className="copy-container">
             <h1>{this.state.eventInfo.title}</h1>
             <h2>{this.state.eventInfo.description}</h2>
-            <h2>{this.state.eventInfo.date}</h2>
+            <h2>{formattedData}</h2>
             <h2>{this.state.eventInfo.time}</h2>
             <h2>{this.state.eventInfo.location}</h2>
           </div>
