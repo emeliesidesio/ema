@@ -17,25 +17,9 @@ export default class CreateEvent extends React.Component {
       guests: [],
       time: "",
       backgroundImage: "",
-      previewEvent: ""
+      emailGuest: ""
     }
   }
-
-  handlePreviewEvent = _id => {
-  fetch(`http://localhost:8080/events/${_id}`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json, text/plain, */*",
-      "Content-Type": "application/json"
-    }
-  }).then(response => (
-    response.json()
-  )).then(json => {
-    this.setState({ previewEvent: json })
-  })
-  console.log("Eventinfo for preview", this.state.previewEvent)
-  }
-
 
   handleTitle = event => {
     this.setState({
@@ -98,17 +82,38 @@ export default class CreateEvent extends React.Component {
       },
       body: JSON.stringify(this.state)
     }).then(response => (
-      this.setState ({
-        title: "",
-        date: "",
-        location: "",
-        description: "",
-        guests: "",
-        backgroundImage: "",
-        time: ""
-      }, () => { console.log("State has been reset", response, response.status) })
-    ))
-  }
+      response.json()
+    )).then(json => {
+      console.log("hej")
+      this.setState({ id: json._id })
+    })
+      // this.setState ({
+      //   title: "",
+      //   date: "",
+      //   location: "",
+      //   description: "",
+      //   guests: "",
+      //   backgroundImage: "",
+      //   time: ""
+      // }, () => { console.log("State has been reset") })
+    }
+
+  // handleEmailGuest =
+  //
+  //   handlePreviewEvent = _id => {
+  //   fetch(`http://localhost:8080/events/${_id}`, {
+  //     method: "GET",
+  //     headers: {
+  //       Accept: "application/json, text/plain, */*",
+  //       "Content-Type": "application/json"
+  //     }
+  //   }).then(response => (
+  //     response.json()
+  //   )).then(json => {
+  //     this.setState({ previewEvent: json })
+  //   })
+  //   console.log("Eventinfo for preview", this.state.previewEvent)
+  //   }
 
   render() {
     return (
@@ -135,6 +140,9 @@ export default class CreateEvent extends React.Component {
           </div>
           <button type="submit">Create event</button>
         </form>
+        <div className="guest-container">
+
+        </div>
       </div>
     )
   }
