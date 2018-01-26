@@ -57,7 +57,7 @@ const EventInfo = mongoose.model("eventInfo", {
     required: true
   },
   date: {
-    type: Date,
+    type: String,
     required: true
   },
   time: {
@@ -84,7 +84,10 @@ const Guest = mongoose.model("guest", {
   firstName: String,
   lastName: String,
   email: String,
-  attending: Boolean
+  attending: {
+    type: String,
+    default: ""
+  }
 })
 
 // add guest:
@@ -99,6 +102,18 @@ app.post("/events/:eventId/guests", (req, res) => {
 app.get("/events/:eventId/guests", (req, res) => {
   Guest.find({eventId: req.params.eventId }).then(eventGuests => {
     res.json(eventGuests)
+  })
+})
+
+app.put("/events/:eventId/guests/:_id", (req, res) => {
+  Guest.update(req.body)
+  .then(() => { res.status(201).send("Guest was uppdated") })
+  .catch(err => { res.status(401).send(err) })
+})
+
+app.get("/events/:eventId/guests/:_id", (req, res) => {
+  Guest.find({eventId: req.params.eventId, _id: req.params._id }).then(OneGuest => {
+    res.json(OneGuest)
   })
 })
 
@@ -138,6 +153,7 @@ app.get("/events/:_id", (req, res) => {
   })
 })
 
+// send emails
 const sendMail = (to, subject, text) => {
   const msg = {
     to: to,

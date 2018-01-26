@@ -6,12 +6,12 @@ export default class Event extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      eventInfo: ""
+      eventInfo: "",
+      reply: ""
     }
   }
 
   componentDidMount() {
-    console.log("Showing event")
     const eventId = this.props.match.params.eventId
     fetch(`http://localhost:8080/events/${eventId}`, {
       method: "GET",
@@ -27,6 +27,24 @@ export default class Event extends React.Component {
     })
   }
 
+  handleRSVP = event => {
+    event.preventDefault()
+    this.setState({
+      reply: event.target.value
+    }, () => {
+      const eventId = this.props.match.params.eventId
+      const _id = this.props.match.params._id
+      fetch(`http://localhost:8080/events/${eventId}/guests/${_id}`, {
+        method: "PUT",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ attending: this.state.reply })
+      })
+    })
+  }
+
   render() {
     return (
       <div className="event-page" style={{ backgroundImage: `url(${this.state.eventInfo.backgroundImage})` }}>
@@ -38,8 +56,8 @@ export default class Event extends React.Component {
             <h2>{this.state.eventInfo.location}</h2>
           </div>
           <div className="CTA-container">
-            <button>I'm Joining</button>
-            <button>I cannot make it</button>
+            <button value="Yes" onClick={this.handleRSVP}>I'm joining</button>
+            <button value="No" onClick={this.handleRSVP}>I cannot make it</button>
           </div>
       </div>
     )

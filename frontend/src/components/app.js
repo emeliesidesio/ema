@@ -16,7 +16,7 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/account" component={Account} />
             <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/event/:eventId" component={Event} />
+            <Route exact path="/event/:eventId/guests/:_id" component={Event} />
             <Route exact path="/create-event" component={CreateEvent} />
           </div>
         </BrowserRouter>
