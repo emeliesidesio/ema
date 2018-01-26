@@ -95,24 +95,24 @@ app.post("/events/:eventId/guests", (req, res) => {
   const event = new Guest(req.body)
 
   event.save()
-  .then(() => { res.status(201).json({answer: "Guest added"}) })
-  .catch(err => { res.status(401).json(err) })
+    .then(() => { res.status(201).json({ answer: "Guest added" }) })
+    .catch(err => { res.status(401).json(err) })
 })
 
 app.get("/events/:eventId/guests", (req, res) => {
-  Guest.find({eventId: req.params.eventId }).then(eventGuests => {
+  Guest.find({ eventId: req.params.eventId }).then(eventGuests => {
     res.json(eventGuests)
   })
 })
 
 app.put("/events/:eventId/guests/:_id", (req, res) => {
   Guest.update(req.body)
-  .then(() => { res.status(201).send("Guest was uppdated") })
-  .catch(err => { res.status(401).send(err) })
+    .then(() => { res.status(201).send("Guest was uppdated") })
+    .catch(err => { res.status(401).send(err) })
 })
 
 app.get("/events/:eventId/guests/:_id", (req, res) => {
-  Guest.find({eventId: req.params.eventId, _id: req.params._id }).then(OneGuest => {
+  Guest.find({ eventId: req.params.eventId, _id: req.params._id }).then(OneGuest => {
     res.json(OneGuest)
   })
 })
@@ -129,10 +129,14 @@ app.post("/events", (req, res) => {
   })
 
   event.save()
-  .then(() => {
-    const guestList = req.body.guests.map(guest => {
-      const oneGuest = new Guest({ email: guest.email, eventId: event._id })
-      return oneGuest.save()
+    .then(() => {
+      const guestList = req.body.guests.map(guest => {
+        const oneGuest = new Guest({ email: guest.email, eventId: event._id })
+        return oneGuest.save()
+      })
+      return Promise.all(guestList)
+    }).then(() => {
+      res.status(201).json(event)
     })
     return Promise.all(guestList)
   }).then(() => {
@@ -157,15 +161,15 @@ app.get("/events/:_id", (req, res) => {
 const sendMail = (to, subject, text) => {
   const msg = {
     to: to,
-    from: 'seizetheparty@example.com',
+    from: "seizetheparty@example.com",
     subject: "You're invited!",
-    html: text,
+    html: text
   }
   sgMail.send(msg)
 }
 
 app.post("/events/:eventId/send_emails", (req, res) => {
-  Guest.find({eventId: req.params.eventId }).then(eventGuests => {
+  Guest.find({ eventId: req.params.eventId }).then(eventGuests => {
     eventGuests.map(guest => {
       sendMail(guest.email, "You're invited!", "välkommen")
     })
@@ -179,8 +183,8 @@ app.post("/signup", (req, res) => {
   user.password = bcrypt.hashSync(user.password)
 
   user.save()
-  .then(() => { res.status(201).json({answer: "User created"}) })
-  .catch(err => { res.status(401).json(err) })
+    .then(() => { res.status(201).json({ answer: "User created" }) })
+    .catch(err => { res.status(401).json(err) })
 })
 
 app.get("/signup", (req, res) => {
@@ -212,14 +216,14 @@ const findUser = (req, res, next) => {
     } else {
       res.status(401).send("Unauthenticated")
     }
- })
+  })
 }
 
 // mount middleware
 app.use("/users/:userId", findUser)
 
 app.get("/users/:userId", (req, res) => {
-    res.json(req.user)
+  res.json(req.user)
 })
 
 app.listen(8080, () => console.log("EMA listening on port 8080!"))
