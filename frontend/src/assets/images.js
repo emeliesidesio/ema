@@ -35,7 +35,7 @@ export default [
     name: "Ice pop night"
   },
   {
-    image: "https://s14.postimg.org/dc0oipcm9/joey-thompson-63366.jpg",
+    image: "https://s13.postimg.org/is68uspfr/hanny-naibaho-388579.jpg",
     id: "8",
     name: "Crazy festival"
   },
@@ -53,5 +53,15 @@ export default [
     image: "https://s14.postimg.org/f3tndl141/eeshan-garg-263528.jpg",
     id: "11",
     name: "Cerveza"
+  },
+  {
+    image: "https://s13.postimg.org/mai8rhg4n/larm-rmah-273854.jpg",
+    id: "12",
+    name: "Tropical"
+  },
+  {
+    image: "https://s13.postimg.org/7ejpjy9vr/tim-mossholder-418237.jpg",
+    id: "13",
+    name: "Color crush"
   }
 ]
