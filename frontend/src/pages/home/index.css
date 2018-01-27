@@ -8,16 +8,22 @@
   background-repeat: no-repeat;
 }
 
-.start-page a {
-  color: white;
-}
-
-.CTA-container a {
-  color: white;
-}
-
 .start-page button {
   border: 1px solid white;
+}
+
+.start-page button:hover {
+  background: white;
+  opacity: 0.8;
+  color: black;
+}
+
+.start-page a:hover {
+  color: black;
+}
+
+.start-page a {
+  color: white;
 }
 
 .copy-container {

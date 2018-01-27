@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Fira+Sans:200,300,400,500,600,700,800");
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,600,700,800");
 
 * {
   box-sizing: border-box;
@@ -30,13 +30,20 @@ h2 {
   color: white;
 }
 
+h3 {
+  font-weight: 300;
+  font-style: italic;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  margin: 0;
+  padding: 0;
+  font-family: "Fira Sans", sans-serif;
+  color: white;
+}
+
 a {
   text-decoration: none;
-  font-family: "Fira Sans", sans-serif;
   color: black;
-  font-size: 20px;
-  letter-spacing: 0.5px;
-  font-weight: 300;
 }
 
 button {
@@ -46,4 +53,9 @@ button {
   padding: 15px 25px 15px 25px;
   margin-right: 20px;
   outline: none;
+  cursor: pointer;
+  font-family: "Fira Sans", sans-serif;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  font-weight: 300;
 }
