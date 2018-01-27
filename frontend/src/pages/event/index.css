@@ -14,6 +14,12 @@
   color: white;
 }
 
+.event-page button:hover {
+  background: white;
+  opacity: 0.8;
+  color: black;
+}
+
 .copy-container {
   text-align: center;
   width: 40vw;
@@ -21,6 +27,10 @@
 }
 
 .copy-container h1 {
+  margin-bottom: 25px;
+}
+
+.copy-container h2 {
   margin-bottom: 25px;
 }
 

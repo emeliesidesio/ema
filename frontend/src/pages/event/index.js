@@ -54,12 +54,11 @@ export default class Event extends React.Component {
         <div className="copy-container">
           <h1>{this.state.eventInfo.title}</h1>
           <h2>{this.state.eventInfo.description}</h2>
-          <h2>{formattedData}</h2>
-          <h2>{this.state.eventInfo.time}</h2>
-          <h2>{this.state.eventInfo.location}</h2>
+          <h3>{formattedData}, {this.state.eventInfo.time}</h3>
+          <h3>{this.state.eventInfo.location}</h3>
         </div>
         <div className="CTA-container">
-          <button value="Yes" onClick={this.handleRSVP}>I'm joining</button>
+          <button value="Yes" onClick={this.handleRSVP}>I&lsquo;m joining</button>
           <button value="No" onClick={this.handleRSVP}>I cannot make it</button>
         </div>
       </div>
