@@ -10,7 +10,7 @@ export default class Home extends React.Component {
         <div className="copy-container">
           <h1>Seize the Party</h1>
           <h2>Create dazzling sites for your events! Host a party, manage your wedding or
-            create a launch party. <br />The options are endless!
+            create a launch party. The options are endless!
           </h2>
         </div>
         <div className="CTA-container">
