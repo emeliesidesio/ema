@@ -30,6 +30,11 @@ h2 {
   color: white;
 }
 
+p {
+  padding: 0;
+  margin: 0;
+}
+
 h3 {
   font-weight: 300;
   font-style: italic;
@@ -60,8 +65,61 @@ button {
   font-weight: 300;
 }
 
-.small-btn {
+input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  font-size: 16px;
+  font-weight: lighter;
+  width: 320px;
+  margin-top: 30px;
+}
+
+.medium-blue-btn {
+  font-size: 16px;
+  margin-top: 50px;
+  background-color: rgb(70, 186, 171);
+  box-shadow: 0 2px 0 0 rgba(22, 29, 37, 0.05);
+  border: none;
+  color:white;
+}
+
+.medium-red-btn {
+  font-size: 16px;
+  margin-top: 50px;
+  background-color: rgb(241, 92, 100);
+  box-shadow: 0 2px 0 0 rgba(22, 29, 37, 0.05);
+  border: none;
+  color:white;
+}
+
+.remove-btn {
   border-radius: 8px;
-  padding: 8px 15px 8px 15px;
+  padding: 8px 12px 8px 12px;
   font-size: 11px;
+  background-color: rgb(241, 92, 100);
+  color:white;
+  border: none;
+  margin: 0;
+  box-shadow: 0 2px 0 0 rgba(22, 29, 37, 0.05)
+}
+
+.remove-btn:hover, .medium-red-btn:hover {
+  background-color: #f14b54;
+}
+
+.add-btn {
+  border-radius: 8px;
+  padding: 8px 12px 8px 12px;
+  margin: 0;
+  font-size: 11px;
+  background-color: rgb(70, 186, 171);
+  color:white;
+  border: none;
+  box-shadow: 0 2px 0 0 rgba(22, 29, 37, 0.05)
+}
+
+.add-btn:hover, .medium-blue-btn:hover {
+  background-color: #40a799;
 }

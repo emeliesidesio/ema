@@ -106,6 +106,7 @@ export default class Preview extends React.Component {
   render() {
     return (
       <div className="preview-page">
+        <h2>Edit your guestlist</h2>
         <div className="preview-container">
           <div className="email-list">
             {this.state.guestList.map(guest => {
@@ -120,10 +121,10 @@ export default class Preview extends React.Component {
           </div>
           <div className="add-guest-preview">
             <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
-            <button className="small-btn" onClick={this.addEmailtoGuestList}>Add Guest</button>
+            <button className="add-btn" onClick={this.addEmailtoGuestList}>Add Guest</button>
           </div>
           <div className="send-invite">
-            <button type="submit" onClick={this.sendInvite}>Send invite</button>
+            <button className="medium-blue-btn" type="submit" onClick={this.sendInvite}>Send invite</button>
           </div>
           <div className="message">
             {this.state.message}

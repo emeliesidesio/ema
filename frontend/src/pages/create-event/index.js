@@ -116,9 +116,9 @@ class CreateEvent extends React.Component {
           </select>
           <div className="add-guest">
             <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
-            <button onClick={this.addEmailtoGuestList}>Add</button>
+            <button className="add-btn" onClick={this.addEmailtoGuestList}>Add</button>
           </div>
-          <button type="submit">Create event</button>
+          <button className="medium-red-btn" type="submit">Create event</button>
           <div className="message">
             {this.state.message}
             {this.state.creator}

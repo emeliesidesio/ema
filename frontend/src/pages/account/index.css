@@ -5,7 +5,7 @@ body {
 }
 
 .login-section {
-  background-color: #7abfa7;
+  background-color: rgb(70, 186, 171);
   width: 100%;
   height: 680px;
   display: flex;
@@ -39,4 +39,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.signup-section h2 {
+  font-size: 30px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  margin-top: 40px;
+  color: rgb(70, 186, 171);
 }

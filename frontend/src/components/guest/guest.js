@@ -11,7 +11,7 @@ export default class Guest extends React.Component {
     return (
       <div className="guest-container">
         <p>{this.props.email}</p>
-        <button className="small-btn" type="button" onClick={this.onClickRemove}>Remove</button>
+        <button className="remove-btn" type="button" onClick={this.onClickRemove}>Remove</button>
       </div>
     )
   }

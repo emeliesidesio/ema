@@ -16,6 +16,7 @@ export default class Account extends React.Component {
           <p>Not a member yet? Sign up below</p>
         </div>
         <div className="signup-section" id="signup">
+          <h2>New to Seize the day?</h2>
           <Signup />
         </div>
       </div>
