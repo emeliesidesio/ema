@@ -90,6 +90,17 @@ const Guest = mongoose.model("guest", {
   }
 })
 
+const authUser = (req, res, next) => {
+  User.findById(req.headers.id).then(user => {
+    if (user && user.accessToken === req.headers.token) {
+      req.user = user
+      next()
+    } else {
+      res.status(401).send("Unauthenticated")
+    }
+  })
+}
+
 // add guest:
 app.post("/events/:eventId/guests", (req, res) => {
   const event = new Guest(req.body)
@@ -123,9 +134,11 @@ app.delete("/events/:eventId/guests/:_id", (req, res) => {
     .catch(err => { res.status(401).send(err) })
 })
 
+app.post("/events", authUser)
 // create event:
 app.post("/events", (req, res) => {
   const event = new EventInfo({
+    creator: req.user,
     title: req.body.title,
     date: req.body.date,
     location: req.body.location,
@@ -143,6 +156,8 @@ app.post("/events", (req, res) => {
       return Promise.all(guestList)
     }).then(() => {
       res.status(201).json(event)
+    }).catch(err => {
+      res.status(400).json(err)
     })
 })
 
@@ -180,13 +195,13 @@ app.post("/events/:eventId/send_emails", (req, res) => {
   res.status(200).json({ answer: "emails sent" })
 })
 
-// signup part:
+// signup part: fixa att man inte kan signa upp två gånger
 app.post("/signup", (req, res) => {
   const user = new User(req.body)
   user.password = bcrypt.hashSync(user.password)
 
   user.save()
-    .then(() => { res.status(201).json({ answer: "User created" }) })
+    .then(() => { res.status(201).json({ answer: "User created", accessToken: user.accessToken, userId: user._id }) })
     .catch(err => { res.status(401).json(err) })
 })
 

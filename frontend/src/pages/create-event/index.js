@@ -9,6 +9,7 @@ class CreateEvent extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      creator: "",
       title: "",
       date: "",
       location: "",
@@ -77,6 +78,8 @@ class CreateEvent extends React.Component {
     fetch("http://localhost:8080/events", {
       method: "POST",
       headers: {
+        token: localStorage.getItem("userAccess"),
+        id: localStorage.getItem("userId"),
         Accept: "application/json",
         "Content-Type": "application/json"
       },
@@ -88,7 +91,7 @@ class CreateEvent extends React.Component {
         this.setState({ message: "Event was not created" })
       }
     }).then(json => {
-      this.props.history.push(`/create-event/${json._id}`)
+      this.props.history.push(`/create-event/preview/${json._id}`)
     })
   }
 
@@ -118,6 +121,7 @@ class CreateEvent extends React.Component {
           <button type="submit">Create event</button>
           <div className="message">
             {this.state.message}
+            {this.state.creator}
           </div>
         </form>
       </div>

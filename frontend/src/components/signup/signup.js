@@ -1,7 +1,8 @@
 import React from "react"
+import { withRouter } from "react-router-dom"
 import "./index.css"
 
-export default class Signup extends React.Component {
+class Signup extends React.Component {
 
   constructor(props) {
     super(props)
@@ -46,14 +47,17 @@ export default class Signup extends React.Component {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(this.state)
-    }).then(response => (
-      this.setState({
-        email: "",
-        password: "",
-        firstName: "",
-        lastName: ""
-      }, () => { console.log("State has been reset", response, response.status) })
-    ))
+    }).then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        console.log("the email is already registered")
+      }
+    }).then(json => {
+      localStorage.setItem("userAccess", json.accessToken)
+      localStorage.setItem("userId", json.userId)
+      this.props.history.push("/create-event/")
+    })
   }
 
   render() {
@@ -70,3 +74,5 @@ export default class Signup extends React.Component {
     )
   }
 }
+
+export default withRouter(Signup)
