@@ -1,5 +1,6 @@
 import React from "react"
 import Guest from "./../../components/guest/guest"
+import "./index.css"
 
 export default class Preview extends React.Component {
   constructor(props) {
@@ -104,22 +105,27 @@ export default class Preview extends React.Component {
 
   render() {
     return (
-      <div>
-        Preview
-        {this.state.guestList.map(guest => {
-          return (
-            <Guest
-              key={guest._id}
-              id={guest._id}
-              email={guest.email}
-              handleRemove={this.removeGuest} />
-          )
-        })}
-        <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
-        <button onClick={this.addEmailtoGuestList}>Add Guest</button>
-        <button type="submit" onClick={this.sendInvite}>Send invite</button>
-        <div className="message">
-          {this.state.message}
+      <div className="preview-page">
+        <div className="email-list">
+          {this.state.guestList.map(guest => {
+            return (
+              <Guest
+                key={guest._id}
+                id={guest._id}
+                email={guest.email}
+                handleRemove={this.removeGuest} />
+            )
+          })}
+          <div className="add-guest-preview">
+            <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
+            <button onClick={this.addEmailtoGuestList}>Add Guest</button>
+          </div>
+          <div className="send-invite">
+            <button type="submit" onClick={this.sendInvite}>Send invite</button>
+          </div>
+          <div className="message">
+            {this.state.message}
+          </div>
         </div>
       </div>
     )
