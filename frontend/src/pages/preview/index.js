@@ -106,19 +106,21 @@ export default class Preview extends React.Component {
   render() {
     return (
       <div className="preview-page">
-        <div className="email-list">
-          {this.state.guestList.map(guest => {
-            return (
-              <Guest
-                key={guest._id}
-                id={guest._id}
-                email={guest.email}
-                handleRemove={this.removeGuest} />
-            )
-          })}
+        <div className="preview-container">
+          <div className="email-list">
+            {this.state.guestList.map(guest => {
+              return (
+                <Guest
+                  key={guest._id}
+                  id={guest._id}
+                  email={guest.email}
+                  handleRemove={this.removeGuest} />
+              )
+            })}
+          </div>
           <div className="add-guest-preview">
             <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
-            <button onClick={this.addEmailtoGuestList}>Add Guest</button>
+            <button className="small-btn" onClick={this.addEmailtoGuestList}>Add Guest</button>
           </div>
           <div className="send-invite">
             <button type="submit" onClick={this.sendInvite}>Send invite</button>

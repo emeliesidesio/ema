@@ -59,3 +59,9 @@ button {
   letter-spacing: 0.5px;
   font-weight: 300;
 }
+
+.small-btn {
+  border-radius: 8px;
+  padding: 8px 15px 8px 15px;
+  font-size: 11px;
+}
