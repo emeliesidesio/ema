@@ -3,7 +3,7 @@ import React from "react"
 export default class Guest extends React.Component {
 
   onClickRemove = () => {
-    this.props.handleRemove(this.props.index)
+    this.props.handleRemove(this.props.id)
   }
 
   render() {

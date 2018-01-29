@@ -6,14 +6,14 @@ export default class Preview extends React.Component {
     super(props)
     this.state = {
       guestList: [],
-      to: "",
-      text: ""
+      message: "",
+      email: ""
     }
   }
 
   componentDidMount() {
-    const guestEmail = this.props.match.params._id
-    fetch(`http://localhost:8080/events/${guestEmail}/guests`, {
+    const eventId = this.props.match.params._id
+    fetch(`http://localhost:8080/events/${eventId}/guests`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -29,6 +29,79 @@ export default class Preview extends React.Component {
     })
   }
 
+  sendInvite = event => {
+    event.preventDefault()
+    const eventId = this.props.match.params._id
+    fetch(`http://localhost:8080/events/${eventId}/send_emails`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    }).then(response => {
+      if (response.ok) {
+        return response.json()
+        // this.setState({ message: "Invitations were sent" })
+      } else {
+        this.setState({ message: "Invitations were not sent" })
+      }
+    })
+  }
+
+  removeGuest = id => {
+    const eventId = this.props.match.params._id
+    const newGuestList = [...this.state.guestList]
+    newGuestList.splice(id, 1)
+    this.setState({
+      guestList: newGuestList
+    })
+    fetch(`http://localhost:8080/events/${eventId}/guests/${id}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    }).then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        console.log("Fail")
+      }
+    })
+  }
+
+  addInvite = event => {
+    this.setState({
+      email: event.target.value
+    })
+  }
+
+  addEmailtoGuestList = event => {
+    event.preventDefault()
+    const eventId = this.props.match.params._id
+    const guest = { email: this.state.email, eventId }
+    this.setState({
+      guestList: [guest, ...this.state.guestList],
+      email: ""
+    })
+    fetch(`http://localhost:8080/events/${eventId}/guests`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(guest)
+    }).then(response => {
+      if (response.ok) {
+        return response.json()
+      } else {
+        console.log("Fail")
+      }
+    })
+  }
+
   render() {
     return (
       <div>
@@ -37,10 +110,17 @@ export default class Preview extends React.Component {
           return (
             <Guest
               key={guest._id}
-              email={guest.email} />
+              id={guest._id}
+              email={guest.email}
+              handleRemove={this.removeGuest} />
           )
         })}
-        <button type="submit">Send invite</button>
+        <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
+        <button onClick={this.addEmailtoGuestList}>Add Guest</button>
+        <button type="submit" onClick={this.sendInvite}>Send invite</button>
+        <div className="message">
+          {this.state.message}
+        </div>
       </div>
     )
   }

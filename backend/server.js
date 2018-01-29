@@ -117,6 +117,12 @@ app.get("/events/:eventId/guests/:_id", (req, res) => {
   })
 })
 
+app.delete("/events/:eventId/guests/:_id", (req, res) => {
+  Guest.findByIdAndRemove({ eventId: req.params.eventId, _id: req.params._id })
+    .then(() => { res.status(201).send("Guest was removed") })
+    .catch(err => { res.status(401).send(err) })
+})
+
 // create event:
 app.post("/events", (req, res) => {
   const event = new EventInfo({
