@@ -17,7 +17,8 @@ export default class Event extends React.Component {
     fetch(`http://localhost:8080/events/${eventId}`, {
       method: "GET",
       headers: {
-        Accept: "application/json"
+        Accept: "application/json",
+        "Content-Type": "application/json"
       }
     }).then(response => {
       return response.json()
@@ -48,7 +49,7 @@ export default class Event extends React.Component {
 
   render() {
     const { date } = this.state.eventInfo
-    const formattedData = moment(date).format("dddd MMM Do YY")
+    const formattedData = moment(date).format("dddd MMM Do YYYY")
     return (
       <div className="event-page" style={{ backgroundImage: `url(${this.state.eventInfo.backgroundImage})` }}>
         <div className="copy-container">

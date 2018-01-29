@@ -161,9 +161,16 @@ app.post("/events", (req, res) => {
     })
 })
 
+// app.get("/events/", (req, res) => {
+//   EventInfo.find().then(allEvents => {
+//     res.json(allEvents)
+//   })
+// })
+
+// ny get
 app.get("/events/", (req, res) => {
-  EventInfo.find().then(allEvents => {
-    res.json(allEvents)
+  EventInfo.find({ creator: req.headers.id }).then(events => {
+    res.json(events)
   })
 })
 
@@ -217,7 +224,8 @@ app.post("/login", (req, res) => {
     if (user && bcrypt.compareSync(req.body.password, user.password)) {
       res.status(200).json({
         message: "Welcome!",
-        accessToken: user.token
+        accessToken: user.accessToken,
+        userId: user._id
       })
     } else {
       res.status(401).json({ message: "Authentication failed" })

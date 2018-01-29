@@ -35,14 +35,14 @@ class Login extends React.Component {
       body: JSON.stringify(this.state)
     }).then(response => {
       if (response.ok) {
-        this.props.history.push("/dashboard")
+        return response.json()
       } else {
         console.log("Unknown user")
       }
-      this.setState({
-        email: "",
-        password: ""
-      }, () => { console.log("State has been reset", response, response.status) })
+    }).then(json => {
+      localStorage.setItem("userAccess", json.accessToken)
+      localStorage.setItem("userId", json.userId)
+      this.props.history.push("/dashboard/")
     })
   }
 
