@@ -55,6 +55,7 @@ export default class Dashboard extends React.Component {
           {this.state.myEvents.map(event => {
             return (
               <MyEvent
+                key={event.title}
                 title={event.title}
                 date={event.date}
                 eventId={event._id}

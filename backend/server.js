@@ -51,7 +51,11 @@ const User = mongoose.model("User", {
 })
 
 const EventInfo = mongoose.model("eventInfo", {
-  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
   title: {
     type: String,
     required: true
@@ -86,7 +90,7 @@ const Guest = mongoose.model("guest", {
   email: String,
   attending: {
     type: String,
-    default: ""
+    default: "Not responded"
   }
 })
 
@@ -196,14 +200,20 @@ app.post("/events/:eventId/send_emails", (req, res) => {
   res.status(200).json({ answer: "emails sent" })
 })
 
-// signup part: fixa att man inte kan signa upp två gånger
+// signup part:
 app.post("/signup", (req, res) => {
-  const user = new User(req.body)
-  user.password = bcrypt.hashSync(user.password)
-
-  user.save()
-    .then(() => { res.status(201).json({ answer: "User created", accessToken: user.accessToken, userId: user._id }) })
-    .catch(err => { res.status(401).json(err) })
+  User.findOne({ email: req.body.email }).then(existingUser => {
+    if (existingUser) {
+      res.status(400).send({ message: "Email already registered" })
+    } else {
+      console.log("hej")
+      const user = new User(req.body)
+      user.password = bcrypt.hashSync(user.password)
+      user.save()
+        .then(() => { res.status(201).json({ answer: "User created", accessToken: user.accessToken, userId: user._id }) })
+        .catch(err => { res.status(401).json(err) })
+    }
+  })
 })
 
 app.get("/signup", (req, res) => {
@@ -211,6 +221,21 @@ app.get("/signup", (req, res) => {
     res.json(allUsers)
   })
 })
+
+// app.post("/signup", (req, res) => {
+//   const user = new User(req.body)
+//   user.password = bcrypt.hashSync(user.password)
+//
+//   user.save()
+//     .then(() => { res.status(201).json({ answer: "User created", accessToken: user.accessToken, userId: user._id }) })
+//     .catch(err => { res.status(401).json(err) })
+// })
+//
+// app.get("/signup", (req, res) => {
+//   User.find().then(allUsers => {
+//     res.json(allUsers)
+//   })
+// })
 
 // login part:
 app.post("/login", (req, res) => {
