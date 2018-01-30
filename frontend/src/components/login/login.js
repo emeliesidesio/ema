@@ -26,7 +26,7 @@ class Login extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    fetch("http://localhost:8080/login", {
+    fetch("https://seizethepartyevents.herokuapp.com/login", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",

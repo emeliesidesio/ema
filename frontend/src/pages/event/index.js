@@ -14,7 +14,7 @@ export default class Event extends React.Component {
 
   componentDidMount() {
     const { eventId } = this.props.match.params
-    fetch(`http://localhost:8080/events/${eventId}`, {
+    fetch(`https://seizethepartyevents.herokuapp.com/events/${eventId}`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -36,7 +36,7 @@ export default class Event extends React.Component {
     }, () => {
       const { eventId } = this.props.match.params
       const { _id } = this.props.match.params
-      fetch(`http://localhost:8080/events/${eventId}/guests/${_id}`, {
+      fetch(`https://seizethepartyevents.herokuapp.com/events/${eventId}/guests/${_id}`, {
         method: "PUT",
         headers: {
           Accept: "application/json",

@@ -75,7 +75,7 @@ class CreateEvent extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    fetch("http://localhost:8080/events", {
+    fetch("https://seizethepartyevents.herokuapp.com/events", {
       method: "POST",
       headers: {
         token: localStorage.getItem("userAccess"),

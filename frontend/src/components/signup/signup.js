@@ -40,7 +40,7 @@ class Signup extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault()
-    fetch("http://localhost:8080/signup", {
+    fetch("https://seizethepartyevents.herokuapp.com/signup", {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",

@@ -14,7 +14,7 @@ export default class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    fetch("http://localhost:8080/events/", {
+    fetch("https://seizethepartyevents.herokuapp.com/events", {
       method: "GET",
       headers: {
         token: localStorage.getItem("userAccess"),
@@ -32,7 +32,7 @@ export default class Dashboard extends React.Component {
   }
 
   showGuestList = eventId => {
-    fetch(`http://localhost:8080/events/${eventId}/guests`, {
+    fetch(`https://seizethepartyevents.herokuapp.com/events/${eventId}/guests`, {
       method: "GET",
       headers: {
         Accept: "application/json",

@@ -14,7 +14,7 @@ export default class Preview extends React.Component {
 
   componentDidMount() {
     const eventId = this.props.match.params._id
-    fetch(`http://localhost:8080/events/${eventId}/guests`, {
+    fetch(`https://seizethepartyevents.herokuapp.com/events/${eventId}/guests`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -32,7 +32,7 @@ export default class Preview extends React.Component {
   sendInvite = event => {
     event.preventDefault()
     const eventId = this.props.match.params._id
-    fetch(`http://localhost:8080/events/${eventId}/send_emails`, {
+    fetch(`https://seizethepartyevents.herokuapp.com/events/${eventId}/send_emails`, {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -57,7 +57,7 @@ export default class Preview extends React.Component {
     this.setState({
       guestList: newGuestList
     })
-    fetch(`http://localhost:8080/events/${eventId}/guests/${id}`, {
+    fetch(`https://seizethepartyevents.herokuapp.com/events/${eventId}/guests/${id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json, text/plain, */*",
@@ -83,7 +83,7 @@ export default class Preview extends React.Component {
     event.preventDefault()
     const eventId = this.props.match.params._id
     const guest = { email: this.state.email, eventId }
-    fetch(`http://localhost:8080/events/${eventId}/guests`, {
+    fetch(`https://seizethepartyevents.herokuapp.com/events/${eventId}/guests`, {
       method: "POST",
       headers: {
         Accept: "application/json, text/plain, */*",
