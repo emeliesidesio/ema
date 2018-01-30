@@ -23,7 +23,6 @@ export default class Preview extends React.Component {
     }).then(response => {
       return response.json()
     }).then(json => {
-      console.log(json)
       this.setState({
         guestList: json
       })
@@ -43,7 +42,6 @@ export default class Preview extends React.Component {
     }).then(response => {
       if (response.ok) {
         return response.json()
-        // this.setState({ message: "Invitations were sent" })
       } else {
         this.setState({ message: "Invitations were not sent" })
       }
@@ -53,7 +51,9 @@ export default class Preview extends React.Component {
   removeGuest = id => {
     const eventId = this.props.match.params._id
     const newGuestList = [...this.state.guestList]
-    newGuestList.splice(id, 1)
+    const guest = this.state.guestList.find(a => a._id === id)
+    const index = this.state.guestList.indexOf(guest)
+    newGuestList.splice(index, 1)
     this.setState({
       guestList: newGuestList
     })
@@ -66,9 +66,9 @@ export default class Preview extends React.Component {
       body: JSON.stringify(this.state)
     }).then(response => {
       if (response.ok) {
-        return response.json()
-      } else {
-        console.log("Fail")
+        this.setState({
+          guestList: newGuestList
+        })
       }
     })
   }
@@ -83,10 +83,6 @@ export default class Preview extends React.Component {
     event.preventDefault()
     const eventId = this.props.match.params._id
     const guest = { email: this.state.email, eventId }
-    this.setState({
-      guestList: [guest, ...this.state.guestList],
-      email: ""
-    })
     fetch(`http://localhost:8080/events/${eventId}/guests`, {
       method: "POST",
       headers: {
@@ -100,6 +96,11 @@ export default class Preview extends React.Component {
       } else {
         console.log("Fail")
       }
+    }).then(json => {
+      this.setState({
+        guestList: [...this.state.guestList, json],
+        email: ""
+      })
     })
   }
 
@@ -112,17 +113,17 @@ export default class Preview extends React.Component {
             {this.state.guestList.map(guest => {
               return (
                 <Guest
-                  key={guest._id}
+                  key={guest.email}
                   id={guest._id}
                   email={guest.email}
                   handleRemove={this.removeGuest} />
               )
             })}
           </div>
-          <div className="add-guest-preview">
+          <form onSubmit={this.addEmailtoGuestList} className="add-guest-preview">
             <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
-            <button className="add-btn" onClick={this.addEmailtoGuestList}>Add Guest</button>
-          </div>
+            <button className="add-btn">Add Guest</button>
+          </form>
           <div className="send-invite">
             <button className="medium-blue-btn" type="submit" onClick={this.sendInvite}>Send invite</button>
           </div>

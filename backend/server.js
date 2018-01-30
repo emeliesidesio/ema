@@ -103,10 +103,10 @@ const authUser = (req, res, next) => {
 
 // add guest:
 app.post("/events/:eventId/guests", (req, res) => {
-  const event = new Guest(req.body)
+  const guest = new Guest(req.body)
 
-  event.save()
-    .then(() => { res.status(201).json({ answer: "Guest added" }) })
+  guest.save()
+    .then(() => { res.status(201).json(guest) })
     .catch(err => { res.status(401).json(err) })
 })
 
@@ -128,12 +128,6 @@ app.put("/events/:eventId/guests/:_id", (req, res) => {
   .then(() => { res.status(201).send("Guest was uppdated") })
   .catch(err => { res.status(401).send(err) })
 })
-
-// app.put("/events/:eventId/guests/:_id", (req, res) => {
-//   Guest.update(req.body)
-//     .then(() => { res.status(201).send("Guest was uppdated") })
-//     .catch(err => { res.status(401).send(err) })
-// })
 
 app.delete("/events/:eventId/guests/:_id", (req, res) => {
   Guest.findByIdAndRemove({ eventId: req.params.eventId, _id: req.params._id })
