@@ -1,0 +1,13 @@
+.myevent-container {
+  margin-top: 40px;
+  width: 700px;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 12px;
+}
+
+.myevent-container button {
+  margin: 0;
+}

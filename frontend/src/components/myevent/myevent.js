@@ -1,5 +1,6 @@
 import React from "react"
 import moment from "moment"
+import "./index.css"
 
 export default class MyEvent extends React.Component {
 
@@ -11,10 +12,12 @@ export default class MyEvent extends React.Component {
     const { date } = this.props
     const formattedData = moment(date).format("dddd MMM Do YYYY")
     return (
-      <div className="guest-container">
-        <p>{this.props.title}</p>
-        <p>{formattedData}</p>
-        <button onClick={this.handleGuestList}>Show guests</button>
+      <div className="myevent-container">
+        <div className="event-info">
+          <h4>{this.props.title}</h4>
+          <p>{formattedData}</p>
+        </div>
+        <button className="add-btn" onClick={this.handleGuestList}>Show guests</button>
       </div>
     )
   }

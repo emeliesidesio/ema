@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import MyEvent from "components/myevent/myevent"
 import DashboardGuest from "components/dashboard-guest/dashboard-guest"
+import "./index.css"
 
 export default class Dashboard extends React.Component {
 
@@ -50,8 +51,9 @@ export default class Dashboard extends React.Component {
   render() {
     const notanswer = this.state.myGuestList.filter((guest => guest.attending === ""))
     return (
-      <div>
-        <div className="event-list">
+      <div className="dashboard-page">
+        <div className="dashboard-container">
+          <h2>Upcoming events</h2>
           {this.state.myEvents.map(event => {
             return (
               <MyEvent
@@ -69,8 +71,8 @@ export default class Dashboard extends React.Component {
                 attending={guest.attending} />
             })}
           </div>
+          <button className="medium-red-btn"><Link to="/create-event">Create new event</Link></button>
         </div>
-        <Link to="/create-event">Create Event</Link>
       </div>
     )
   }
