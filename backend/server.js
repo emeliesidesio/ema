@@ -123,10 +123,17 @@ app.get("/events/:eventId/guests/:_id", (req, res) => {
 })
 
 app.put("/events/:eventId/guests/:_id", (req, res) => {
-  Guest.update(req.body)
-    .then(() => { res.status(201).send("Guest was uppdated") })
-    .catch(err => { res.status(401).send(err) })
+  const condition = { eventId: req.params.eventId, _id: req.params._id }
+  Guest.update(condition, req.body)
+  .then(() => { res.status(201).send("Guest was uppdated") })
+  .catch(err => { res.status(401).send(err) })
 })
+
+// app.put("/events/:eventId/guests/:_id", (req, res) => {
+//   Guest.update(req.body)
+//     .then(() => { res.status(201).send("Guest was uppdated") })
+//     .catch(err => { res.status(401).send(err) })
+// })
 
 app.delete("/events/:eventId/guests/:_id", (req, res) => {
   Guest.findByIdAndRemove({ eventId: req.params.eventId, _id: req.params._id })
