@@ -18,7 +18,8 @@ app.use(cors())
 
 // Connect to MongoDB, on the "products-api" database. If the db doesn't
 // exist, mongo will create it.
-mongoose.connect("mongodb://localhost/ema")
+const mongoUrl = process.env.MONGO_URL || ("mongodb://localhost/ema")
+mongoose.connect(mongoUrl, { useMongoClient: true })
 
 // This makes mongo use ES6 promises, instead of its own implementation
 mongoose.Promise = Promise
@@ -271,4 +272,7 @@ app.get("/users/:userId", (req, res) => {
   res.json(req.user)
 })
 
-app.listen(8080, () => console.log("EMA listening on port 8080!"))
+const port = process.env.PORT || 8080
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`)
+})
