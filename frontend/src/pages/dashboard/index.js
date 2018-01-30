@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import MyEvent from "components/myevent/myevent"
-import Guest from "components/guest/guest"
+import DashboardGuest from "components/dashboard-guest/dashboard-guest"
 
 export default class Dashboard extends React.Component {
 
@@ -31,19 +31,16 @@ export default class Dashboard extends React.Component {
     })
   }
 
-  // Denna funkar inte riktigt, fixa tisdag 30/1
   showGuestList = eventId => {
-    fetch(`http://localhost8080/events/${eventId}/guests`, {
+    fetch(`http://localhost:8080/events/${eventId}/guests`, {
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       }
     }).then(response => {
-      console.log("hej", response)
       return response.json()
     }).then(json => {
-      console.log("hej", json)
       this.setState({
         myGuestList: json
       })
@@ -65,9 +62,10 @@ export default class Dashboard extends React.Component {
             )
           })}
           <div>
-            {notanswer.map(guest => {
-              return <Guest
-                email={guest.email} />
+            {this.state.myGuestList.map(guest => {
+              return <DashboardGuest
+                email={guest.email}
+                attending={guest.attending} />
             })}
           </div>
         </div>

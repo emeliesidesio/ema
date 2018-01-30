@@ -14,8 +14,7 @@ export default class MyEvent extends React.Component {
       <div className="guest-container">
         <p>{this.props.title}</p>
         <p>{formattedData}</p>
-        <button onClick={this.handleGuestList}>Show Guests</button>
-        {/* <button className="small-btn" type="button" onClick={this.onClickRemove}>Remove</button> */}
+        <button onClick={this.handleGuestList}>Show guests</button>
       </div>
     )
   }

@@ -104,7 +104,7 @@ class CreateEvent extends React.Component {
           <div><input type="date" value={this.state.date} onChange={this.handleDate} required placeholder="Date" /></div>
           <div><input type="time" value={this.state.time} onChange={this.handleTime} required placeholder="Time" /></div>
           <div><input type="text" value={this.state.location} onChange={this.handleLocation} required placeholder="Location" /></div>
-          <select className="scroll-background" onChange={this.handleBackground}>
+          <select className="scroll-container" onChange={this.handleBackground}>
             <option>Choose theme</option>
             {Background.map(background => (
               <ChooseBackground

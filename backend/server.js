@@ -116,16 +116,16 @@ app.get("/events/:eventId/guests", (req, res) => {
   })
 })
 
-app.put("/events/:eventId/guests/:_id", (req, res) => {
-  Guest.update(req.body)
-    .then(() => { res.status(201).send("Guest was uppdated") })
-    .catch(err => { res.status(401).send(err) })
-})
-
 app.get("/events/:eventId/guests/:_id", (req, res) => {
   Guest.find({ eventId: req.params.eventId, _id: req.params._id }).then(OneGuest => {
     res.json(OneGuest)
   })
+})
+
+app.put("/events/:eventId/guests/:_id", (req, res) => {
+  Guest.update(req.body)
+    .then(() => { res.status(201).send("Guest was uppdated") })
+    .catch(err => { res.status(401).send(err) })
 })
 
 app.delete("/events/:eventId/guests/:_id", (req, res) => {
@@ -161,13 +161,6 @@ app.post("/events", (req, res) => {
     })
 })
 
-// app.get("/events/", (req, res) => {
-//   EventInfo.find().then(allEvents => {
-//     res.json(allEvents)
-//   })
-// })
-
-// ny get
 app.get("/events/", (req, res) => {
   EventInfo.find({ creator: req.headers.id }).then(events => {
     res.json(events)
@@ -185,7 +178,7 @@ const sendMail = (to, text) => {
   const msg = {
     to: to,
     from: "noreply@seizetheparty.io",
-    subject: "You're invited!",
+    subject: "You're invited! 🎈🎉 ",
     html: text
   }
   sgMail.send(msg)
