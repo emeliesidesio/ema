@@ -26,13 +26,13 @@
   color: white;
 }
 
-.copy-container {
+.start-copy-container {
   text-align: center;
   width: 40vw;
   margin: 0 auto 50px auto;
 }
 
-.copy-container h1 {
+.start-copy-container h1 {
   margin-bottom: 25px;
 }
 

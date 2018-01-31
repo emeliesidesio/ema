@@ -12,6 +12,10 @@
   text-align: right;
 }
 
+.guest-accordion .add-btn {
+  margin-left: 15px;
+}
+
 .myevent-container button {
   margin: 0;
 }
