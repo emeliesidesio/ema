@@ -213,11 +213,10 @@ app.post("/signup", (req, res) => {
     if (existingUser) {
       res.status(400).send({ message: "Email already registered" })
     } else {
-      console.log("hej")
       const user = new User(req.body)
       user.password = bcrypt.hashSync(user.password)
       user.save()
-        .then(() => { res.status(201).json({ answer: "User created", accessToken: user.accessToken, userId: user._id }) })
+        .then(() => { res.status(201).json({ answer: "User created", accessToken: user.accessToken, userId: user._id, userEmail: user.email }) })
         .catch(err => { res.status(401).json(err) })
     }
   })
@@ -229,21 +228,6 @@ app.get("/signup", (req, res) => {
   })
 })
 
-// app.post("/signup", (req, res) => {
-//   const user = new User(req.body)
-//   user.password = bcrypt.hashSync(user.password)
-//
-//   user.save()
-//     .then(() => { res.status(201).json({ answer: "User created", accessToken: user.accessToken, userId: user._id }) })
-//     .catch(err => { res.status(401).json(err) })
-// })
-//
-// app.get("/signup", (req, res) => {
-//   User.find().then(allUsers => {
-//     res.json(allUsers)
-//   })
-// })
-
 // login part:
 app.post("/login", (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
@@ -251,7 +235,8 @@ app.post("/login", (req, res) => {
       res.status(200).json({
         message: "Welcome!",
         accessToken: user.accessToken,
-        userId: user._id
+        userId: user._id,
+        userEmail: user.email
       })
     } else {
       res.status(401).json({ message: "Authentication failed" })

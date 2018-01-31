@@ -8,6 +8,7 @@ class CreateEvent extends React.Component {
 
   constructor(props) {
     super(props)
+    const creatorEmail = localStorage.getItem("userEmail")
     this.state = {
       creator: "",
       title: "",
@@ -15,7 +16,7 @@ class CreateEvent extends React.Component {
       location: "",
       description: "",
       email: "",
-      guests: [],
+      guests: [{ creatorEmail }],
       startTime: "",
       endTime: "",
       backgroundImage: "",
@@ -87,6 +88,7 @@ class CreateEvent extends React.Component {
       headers: {
         token: localStorage.getItem("userAccess"),
         id: localStorage.getItem("userId"),
+        email: localStorage.getItem("userEmail"),
         Accept: "application/json",
         "Content-Type": "application/json"
       },
