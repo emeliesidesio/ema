@@ -29,6 +29,14 @@ export default class Event extends React.Component {
     })
   }
 
+  handleAlert = () => {
+    if (this.state.reply === "Yes") {
+      alert("Yey, you are joining the party!")
+    } else if (this.state.reply === "No") {
+      alert("See you at the next party!")
+    }
+  }
+
   handleRSVP = event => {
     event.preventDefault()
     this.setState({
@@ -44,6 +52,7 @@ export default class Event extends React.Component {
         },
         body: JSON.stringify({ attending: this.state.reply })
       })
+      this.handleAlert()
     })
   }
 

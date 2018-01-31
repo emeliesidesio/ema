@@ -29,6 +29,10 @@ export default class Preview extends React.Component {
     })
   }
 
+  confirmSentEmail = () => {
+    alert("Invites were sent")
+  }
+
   sendInvite = event => {
     event.preventDefault()
     const eventId = this.props.match.params._id
@@ -42,6 +46,9 @@ export default class Preview extends React.Component {
     }).then(response => {
       if (response.ok) {
         return response.json()
+          .then(json => {
+            this.confirmSentEmail()
+          })
       } else {
         this.setState({ message: "Invitations were not sent" })
       }
