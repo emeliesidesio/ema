@@ -19,8 +19,7 @@ class CreateEvent extends React.Component {
       guests: [{ email }],
       startTime: "",
       endTime: "",
-      backgroundImage: "",
-      message: ""
+      backgroundImage: ""
     }
   }
 
@@ -131,10 +130,6 @@ class CreateEvent extends React.Component {
             <button className="add-btn" onClick={this.addEmailtoGuestList}>Add</button>
           </div>
           <button className="medium-red-btn" type="submit">Create event</button>
-          <div className="message">
-            {this.state.message}
-            {this.state.creator}
-          </div>
         </form>
       </div>
     )

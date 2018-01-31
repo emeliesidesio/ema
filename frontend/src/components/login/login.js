@@ -61,10 +61,10 @@ class Login extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit} className="login-form">
+          <p id="login-message">{this.state.message}</p>
           <div><input type="email" value={this.state.email} onChange={this.handleEmail} required placeholder="Email" /></div>
           <div><input type="password" value={this.state.password} onChange={this.handlePassword} required placeholder="Password" /></div>
           <button className="medium-red-btn" type="submit">Log in</button>
-          <p id="login-message">{this.state.message}</p>
         </form>
       </div>
     )
