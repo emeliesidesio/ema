@@ -200,7 +200,7 @@ app.post("/events/:eventId/send_emails", (req, res) => {
   Guest.find({ eventId: req.params.eventId }).then(eventGuests => {
     eventGuests.map(guest => {
       const url = `www.seizetheparty.events/${guest.eventId}/guests/${guest._id}`
-      const emailMessage = `<div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/l2JHPB58MjfV8W3K0" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/redbull-party-las-vegas-confetti-l2JHPB58MjfV8W3K0">via GIPHY</a></p><h1>Hi,</h1><p> you are invited to a party! RSVP here: ${url}<br/>Enjoy your party!</p>`
+      const emailMessage = `<iframe src="https://giphy.com/embed/l2JHPB58MjfV8W3K0" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><br/><h1>Hi,</h1><br/>you are invited to a party!<br/> RSVP here: ${url}<br/><br/>Enjoy your party!`
       sendMail(guest.email, emailMessage)
     })
   })
