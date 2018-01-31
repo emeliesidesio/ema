@@ -188,8 +188,10 @@ app.get("/events/:_id", (req, res) => {
 const sendMail = (to, text) => {
   const msg = {
     to: to,
-    name: "Seize the Party",
-    from: "noreply@seizetheparty.events",
+    from: {
+      email: "noreply@seizetheparty.events",
+      name: "Seize the Party"
+    },
     subject: "You're invited! 🎈🎉 ",
     html: text
   }
@@ -200,7 +202,7 @@ app.post("/events/:eventId/send_emails", (req, res) => {
   Guest.find({ eventId: req.params.eventId }).then(eventGuests => {
     eventGuests.map(guest => {
       const url = `www.seizetheparty.events/${guest.eventId}/guests/${guest._id}`
-      const emailMessage = `<iframe src="https://giphy.com/embed/l2JHPB58MjfV8W3K0" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><br/><h1>Hi,</h1><br/>you are invited to a party!<br/> RSVP here: ${url}<br/><br/>Enjoy your party!`
+      const emailMessage = `<h1>Hi,</h1><br/>you are invited to a party!<br/><a href="${url}">RSVP here</a><br/><br/>Enjoy your party!`
       sendMail(guest.email, emailMessage)
     })
   })
