@@ -7,6 +7,11 @@
   padding-bottom: 12px;
 }
 
+.guest-accordion {
+  width: 350px;
+  text-align: right;
+}
+
 .myevent-container button {
   margin: 0;
 }

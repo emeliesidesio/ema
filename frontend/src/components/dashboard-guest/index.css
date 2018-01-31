@@ -1,4 +1,11 @@
-.guest-container p {
+.dashboard-guest-container p {
   font-size: 14px;
   font-style: italic;
+}
+
+.dashboard-guest-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
 }

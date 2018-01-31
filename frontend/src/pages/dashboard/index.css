@@ -1,7 +1,7 @@
 .dashboard-page {
   background-color: rgb(70, 186, 171);
   width: 100%;
-  height: 700px;
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +16,7 @@
   align-items: center;
   justify-content: center;
   padding: 50px 0 50px 0;
+  margin: 50px 0 50px 0;
   box-shadow: 2px 2px 0 2px rgba(22, 29, 37, 0.05);
 }
 
