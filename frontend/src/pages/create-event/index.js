@@ -16,7 +16,8 @@ class CreateEvent extends React.Component {
       description: "",
       email: "",
       guests: [],
-      time: "",
+      startTime: "",
+      endTime: "",
       backgroundImage: "",
       message: ""
     }
@@ -67,9 +68,15 @@ class CreateEvent extends React.Component {
     })
   }
 
-  handleTime = event => {
+  handleStartTime = event => {
     this.setState({
-      time: event.target.value
+      startTime: event.target.value
+    })
+  }
+
+  handleEndTime = event => {
+    this.setState({
+      endTime: event.target.value
     })
   }
 
@@ -102,7 +109,10 @@ class CreateEvent extends React.Component {
           <div><input type="text" value={this.state.title} onChange={this.handleTitle} required placeholder="Title" /></div>
           <div><input type="text" value={this.state.description} onChange={this.handleDescription} required placeholder="Description" /></div>
           <div><input type="date" value={this.state.date} onChange={this.handleDate} required placeholder="Date" /></div>
-          <div><input type="time" value={this.state.time} onChange={this.handleTime} required placeholder="Time" /></div>
+          <div className="time-input">
+            <div><p>Start</p><input type="time" value={this.state.startTime} onChange={this.handleStartTime} required /></div>
+            <div><p>End</p><input type="time" value={this.state.endTime} onChange={this.handleEndTime} required /></div>
+          </div>
           <div><input type="text" value={this.state.location} onChange={this.handleLocation} required placeholder="Location" /></div>
           <select className="scroll-container" onChange={this.handleBackground}>
             <option>Choose theme</option>

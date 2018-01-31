@@ -13,12 +13,6 @@ export default class MyEvent extends React.Component {
     }
   }
 
-  // handleClick = () => {
-  //   this.setState({
-  //     down: !this.state.down
-  //   })
-  // }
-
   handleGuestList = () => {
     this.showGuestList(this.props.eventId)
     this.setState({

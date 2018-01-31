@@ -65,7 +65,11 @@ const EventInfo = mongoose.model("eventInfo", {
     type: Date,
     required: true
   },
-  time: {
+  startTime: {
+    type: String,
+    required: true
+  },
+  endTime: {
     type: String,
     required: true
   },
@@ -148,7 +152,8 @@ app.post("/events", (req, res) => {
     title: req.body.title,
     date: req.body.date,
     location: req.body.location,
-    time: req.body.time,
+    startTime: req.body.startTime,
+    endTime: req.body.endTime,
     backgroundImage: req.body.backgroundImage,
     description: req.body.description
   })
