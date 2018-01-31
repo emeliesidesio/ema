@@ -132,6 +132,17 @@ select {
   box-shadow: 0 2px 0 0 rgba(22, 29, 37, 0.05)
 }
 
+.yellow-btn {
+  border-radius: 8px;
+  padding: 8px 12px 8px 12px;
+  font-size: 11px;
+  background-color: #ecc466;
+  color:white;
+  border: none;
+  margin: 0;
+  box-shadow: 0 2px 0 0 rgba(22, 29, 37, 0.05)
+}
+
 .remove-btn:hover, .medium-red-btn:hover {
   background-color: #f14b54;
 }

@@ -7,7 +7,7 @@ export default class DashboardGuest extends React.Component {
     return (
       <div className="guest-container">
         <p>{this.props.email}</p>
-        <p className="add-btn">{this.props.attending}</p>
+        <div className="yellow-btn">{this.props.attending}</div>
       </div>
     )
   }

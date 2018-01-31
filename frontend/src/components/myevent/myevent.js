@@ -1,11 +1,45 @@
 import React from "react"
 import moment from "moment"
+import DashboardGuest from "components/dashboard-guest/dashboard-guest"
 import "./index.css"
 
 export default class MyEvent extends React.Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      myGuestList: [],
+      down: false
+    }
+  }
+
+  // handleClick = () => {
+  //   this.setState({
+  //     down: !this.state.down
+  //   })
+  // }
+
   handleGuestList = () => {
-    this.props.showGuests(this.props.eventId)
+    this.showGuestList(this.props.eventId)
+    this.setState({
+      down: !this.state.down
+    })
+  }
+
+  showGuestList = eventId => {
+    fetch(`https://seizethepartyevents.herokuapp.com/events/${eventId}/guests`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      }
+    }).then(response => {
+      return response.json()
+    }).then(json => {
+      this.setState({
+        myGuestList: json
+      })
+    })
   }
 
   render() {
@@ -17,7 +51,17 @@ export default class MyEvent extends React.Component {
           <h4>{this.props.title}</h4>
           <p>{formattedData}</p>
         </div>
-        <button className="add-btn" onClick={this.handleGuestList}>Show guests</button>
+        <div className="guest-accordion">
+          <button className="add-btn" onClick={this.handleGuestList}>Show guests</button>
+          <div className={this.state.down ? "down" : "up"}>
+            {this.state.myGuestList.map(guest => {
+              return <DashboardGuest
+                className={this.state.down ? "down" : "up"}
+                email={guest.email}
+                attending={guest.attending} />
+            })}
+          </div>
+        </div>
       </div>
     )
   }

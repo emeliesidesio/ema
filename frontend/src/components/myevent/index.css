@@ -10,3 +10,11 @@
 .myevent-container button {
   margin: 0;
 }
+
+.down {
+  display: block;
+}
+
+.up {
+  display: none;
+}
