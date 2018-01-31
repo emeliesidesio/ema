@@ -10,7 +10,8 @@ class Signup extends React.Component {
       email: "",
       password: "",
       firstName: "",
-      lastName: ""
+      lastName: "",
+      message: ""
     }
   }
 
@@ -38,8 +39,13 @@ class Signup extends React.Component {
     })
   }
 
-  rejectedAccess = () => {
-    alert("User already exists")
+  handleAlert = () => {
+    this.setState({
+      message: "User already exists"
+    })
+    setTimeout(() => {
+      this.setState({ message: "" })
+    }, 3500)
   }
 
   handleSubmit = event => {
@@ -61,7 +67,7 @@ class Signup extends React.Component {
             this.props.history.push("/create-event/")
           })
       } else {
-        this.rejectedAccess()
+        this.handleAlert()
       }
     })
   }
@@ -75,6 +81,7 @@ class Signup extends React.Component {
           <div><input type="email" value={this.state.email} onChange={this.handleEmail} required placeholder="Email" /></div>
           <div><input type="password" value={this.state.password} onChange={this.handlePassword} required placeholder="Password" /></div>
           <button className="medium-blue-btn" type="submit">Sign up</button>
+          <p id="signup-message">{this.state.message}</p>
         </form>
       </div>
     )

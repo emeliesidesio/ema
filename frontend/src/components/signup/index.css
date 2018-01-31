@@ -9,3 +9,12 @@
   justify-content: center;
   margin: 30px 0 30px 0;
 }
+
+#signup-message {
+  color: black;
+  font-size: 12px;
+  margin-top: 120px;
+  font-style: italic;
+  position: fixed;
+  z-index: 100;
+}

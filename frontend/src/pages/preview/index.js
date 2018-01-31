@@ -136,7 +136,7 @@ export default class Preview extends React.Component {
           </div>
         </div>
         <div className="link-container">
-          <Link to={`/${this.props.match.params._id}`} rel="noopener noreferrer" target="_blank"><button className="yellow-btn">Preview event</button></Link>
+          <Link to={`/event/${this.props.match.params._id}`} rel="noopener noreferrer" target="_blank"><button className="yellow-btn">Preview event</button></Link>
           <Link to="/dashboard"><button className="add-btn">Dashboard</button></Link>
         </div>
       </div>

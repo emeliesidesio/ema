@@ -8,7 +8,8 @@ class Login extends React.Component {
     super(props)
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      message: ""
     }
   }
 
@@ -24,8 +25,13 @@ class Login extends React.Component {
     })
   }
 
-  rejectedAccess = () => {
-    alert("Email and password doesn't match")
+  handleAlert = () => {
+    this.setState({
+      message: "Email and password doesn't match!"
+    })
+    setTimeout(() => {
+      this.setState({ message: "" })
+    }, 3500)
   }
 
   handleSubmit = event => {
@@ -46,7 +52,7 @@ class Login extends React.Component {
             this.props.history.push("/dashboard/")
           })
       } else {
-        this.rejectedAccess()
+        this.handleAlert()
       }
     })
   }
@@ -58,6 +64,7 @@ class Login extends React.Component {
           <div><input type="email" value={this.state.email} onChange={this.handleEmail} required placeholder="Email" /></div>
           <div><input type="password" value={this.state.password} onChange={this.handlePassword} required placeholder="Password" /></div>
           <button className="medium-red-btn" type="submit">Log in</button>
+          <p id="login-message">{this.state.message}</p>
         </form>
       </div>
     )

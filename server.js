@@ -213,7 +213,7 @@ app.post("/events/:eventId/send_emails", (req, res) => {
 app.post("/signup", (req, res) => {
   User.findOne({ email: req.body.email }).then(existingUser => {
     if (existingUser) {
-      res.status(400).send({ message: "Email already registered" })
+      res.status(400).json({ message: "Email already registered" })
     } else {
       const user = new User(req.body)
       user.password = bcrypt.hashSync(user.password)

@@ -38,3 +38,30 @@
   display: flex;
   justify-content: center;
 }
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 0.8; }
+}
+
+.message {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(70, 186, 171);
+  opacity: 0.8;
+  color: white;
+  position: absolute;
+  z-index: 100;
+  animation: fadein 1.5s;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
