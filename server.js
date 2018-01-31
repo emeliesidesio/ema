@@ -179,7 +179,7 @@ app.get("/events/", (req, res) => {
 })
 
 app.get("/events/:_id", (req, res) => {
-  EventInfo.findOne().then(event => {
+  EventInfo.findOne({ _id: req.params._id }).then(event => {
     res.json(event)
   })
 })
@@ -188,7 +188,7 @@ app.get("/events/:_id", (req, res) => {
 const sendMail = (to, text) => {
   const msg = {
     to: to,
-    sender: "Seize the Party",
+    name: "Seize the Party",
     from: "noreply@seizetheparty.events",
     subject: "You're invited! 🎈🎉 ",
     html: text
@@ -200,7 +200,7 @@ app.post("/events/:eventId/send_emails", (req, res) => {
   Guest.find({ eventId: req.params.eventId }).then(eventGuests => {
     eventGuests.map(guest => {
       const url = `www.seizetheparty.events/${guest.eventId}/guests/${guest._id}`
-      const emailMessage = `Hi, you are invited to a party! RSVP here: ${url}`
+      const emailMessage = `<div style="width:100%;height:0;padding-bottom:56%;position:relative;"><iframe src="https://giphy.com/embed/l2JHPB58MjfV8W3K0" width="100%" height="100%" style="position:absolute" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></div><p><a href="https://giphy.com/gifs/redbull-party-las-vegas-confetti-l2JHPB58MjfV8W3K0">via GIPHY</a></p><h1>Hi,</h1><p> you are invited to a party! RSVP here: ${url}<br/>Enjoy your party!</p>`
       sendMail(guest.email, emailMessage)
     })
   })

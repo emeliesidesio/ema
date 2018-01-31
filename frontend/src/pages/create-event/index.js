@@ -8,7 +8,7 @@ class CreateEvent extends React.Component {
 
   constructor(props) {
     super(props)
-    const creatorEmail = localStorage.getItem("userEmail")
+    const email = localStorage.getItem("userEmail")
     this.state = {
       creator: "",
       title: "",
@@ -16,7 +16,7 @@ class CreateEvent extends React.Component {
       location: "",
       description: "",
       email: "",
-      guests: [{ creatorEmail }],
+      guests: [{ email }],
       startTime: "",
       endTime: "",
       backgroundImage: "",
