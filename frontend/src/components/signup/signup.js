@@ -38,6 +38,10 @@ class Signup extends React.Component {
     })
   }
 
+  rejectedAccess = () => {
+    alert("User already exists")
+  }
+
   handleSubmit = event => {
     event.preventDefault()
     fetch("https://seizethepartyevents.herokuapp.com/signup", {
@@ -50,13 +54,14 @@ class Signup extends React.Component {
     }).then(response => {
       if (response.ok) {
         return response.json()
+          .then(json => {
+            localStorage.setItem("userAccess", json.accessToken)
+            localStorage.setItem("userId", json.userId)
+            this.props.history.push("/create-event/")
+          })
       } else {
-        console.log("the email is already registered")
+        this.rejectedAccess()
       }
-    }).then(json => {
-      localStorage.setItem("userAccess", json.accessToken)
-      localStorage.setItem("userId", json.userId)
-      this.props.history.push("/create-event/")
     })
   }
 

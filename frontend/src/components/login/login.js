@@ -24,6 +24,10 @@ class Login extends React.Component {
     })
   }
 
+  rejectedAccess = () => {
+    alert("Email and password doesn't match")
+  }
+
   handleSubmit = event => {
     event.preventDefault()
     fetch("https://seizethepartyevents.herokuapp.com/login", {
@@ -36,13 +40,14 @@ class Login extends React.Component {
     }).then(response => {
       if (response.ok) {
         return response.json()
+          .then(json => {
+            localStorage.setItem("userAccess", json.accessToken)
+            localStorage.setItem("userId", json.userId)
+            this.props.history.push("/dashboard/")
+          })
       } else {
-        console.log("Unknown user")
+        this.rejectedAccess()
       }
-    }).then(json => {
-      localStorage.setItem("userAccess", json.accessToken)
-      localStorage.setItem("userId", json.userId)
-      this.props.history.push("/dashboard/")
     })
   }
 
