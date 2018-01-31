@@ -1,6 +1,7 @@
 import React from "react"
 import moment from "moment"
 import DashboardGuest from "components/dashboard-guest/dashboard-guest"
+import { Link } from "react-router-dom"
 import "./index.css"
 
 export default class MyEvent extends React.Component {
@@ -42,6 +43,7 @@ export default class MyEvent extends React.Component {
     return (
       <div className="myevent-container">
         <div className="event-info">
+          <Link to={`/${this.props.eventId}`} rel="noopener noreferrer" target="_blank"><button className="add-btn">Preview event</button></Link>
           <h4>{this.props.title}</h4>
           <p>{formattedData}</p>
         </div>

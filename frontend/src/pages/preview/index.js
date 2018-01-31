@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import Guest from "./../../components/guest/guest"
 import "./index.css"
 
@@ -7,7 +8,6 @@ export default class Preview extends React.Component {
     super(props)
     this.state = {
       guestList: [],
-      message: "",
       email: ""
     }
   }
@@ -127,9 +127,10 @@ export default class Preview extends React.Component {
           <div className="send-invite">
             <button className="medium-blue-btn" type="submit" onClick={this.sendInvite}>Send invite</button>
           </div>
-          <div className="message">
-            {this.state.message}
-          </div>
+        </div>
+        <div className="link-container">
+          <Link to={`/${this.props.match.params._id}`} rel="noopener noreferrer" target="_blank"><button className="yellow-btn">Preview event</button></Link>
+          <Link to="/dashboard"><button className="add-btn">Dashboard</button></Link>
         </div>
       </div>
     )
