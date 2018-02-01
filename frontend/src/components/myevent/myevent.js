@@ -47,7 +47,7 @@ export default class MyEvent extends React.Component {
           <p>{formattedData}</p>
         </div>
         <div className="guest-accordion">
-          <Link to={`/event/${this.props.eventId}`} rel="noopener noreferrer" target="_blank"><button className="add-btn">Preview</button></Link>
+          <Link to={`/event/${this.props.eventId}`}><button className="add-btn">Preview</button></Link>
           <button className="add-btn" onClick={this.handleGuestList}>Show guests</button>
           <div className={this.state.down ? "down" : "up"}>
             {this.state.myGuestList.map(guest => {
@@ -56,7 +56,7 @@ export default class MyEvent extends React.Component {
                 email={guest.email}
                 attending={guest.attending} />
             })}
-            <Link to={`/create-event/preview/${this.props.eventId}`} rel="noopener noreferrer" target="_blank"><button className="add-btn" id="edit-guestList">Edit Guestlist</button></Link>
+            <Link to={`/create-event/preview/${this.props.eventId}`}><button className="add-btn" id="edit-guestList">Edit Guestlist</button></Link>
           </div>
         </div>
       </div>

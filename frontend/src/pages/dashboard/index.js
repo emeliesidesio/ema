@@ -43,7 +43,9 @@ export default class Dashboard extends React.Component {
       body: JSON.stringify(this.state)
     }).then(response => {
       if (response.ok) {
-        localStorage.removeItem("userId", "userAccess")
+        localStorage.removeItem("userId")
+        localStorage.removeItem("userAccess")
+        localStorage.removeItem("userEmail")
         this.props.history.push("/")
       }
     })
@@ -52,7 +54,9 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard-page">
-        <button className="remove-btn" onClick="handleLogout">Sign out</button>
+        <div className="navigation">
+          <button className="remove-btn" onClick={this.handleLogout}>Sign out</button>
+        </div>
         <div className="dashboard-container">
           <h2>Upcoming events</h2>
           {this.state.myEvents.map(event => {

@@ -1,4 +1,5 @@
 import React from "react"
+import { Link } from "react-router-dom"
 import moment from "moment"
 
 export default class EventPreview extends React.Component {
@@ -39,7 +40,7 @@ export default class EventPreview extends React.Component {
       body: JSON.stringify(this.state)
     }).then(response => {
       if (response.ok) {
-        this.props.history.push("/")
+        this.props.history.push("/dashboard")
       }
     })
   }
@@ -49,6 +50,10 @@ export default class EventPreview extends React.Component {
     const formattedData = moment(date).format("dddd MMM Do YYYY")
     return (
       <div className="event-page" style={{ backgroundImage: `url(${this.state.eventInfo.backgroundImage})` }}>
+        <div className="navigation-preview">
+          <Link to="/dashboard"><button id="yellow-btn">Dashboard</button></Link>
+          <button id="delete-btn" onClick={this.removeEvent}>Delete event</button>
+        </div>
         <div className="copy-container">
           <h1>{this.state.eventInfo.title}</h1>
           <h2>{this.state.eventInfo.description}</h2>
@@ -59,7 +64,6 @@ export default class EventPreview extends React.Component {
           <button>I&lsquo;m joining</button>
           <button>I can&lsquo;t join</button>
         </div>
-        <button id="delete-btn" onClick={this.removeEvent}>Delete your event</button>
       </div>
     )
   }

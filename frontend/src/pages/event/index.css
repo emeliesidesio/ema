@@ -10,6 +10,49 @@
   background-size: cover;
 }
 
+.navigation-preview {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  position: fixed;
+  margin-top: -300px;
+}
+
+.navigation-preview button {
+  float: right;
+  margin-right: 35px;
+}
+
+#yellow-btn {
+  border-radius: 8px;
+  padding: 8px 12px 8px 12px;
+  font-size: 11px;
+  background-color: #f5c149;
+  color:white;
+  border: none;
+  margin-right: 10px;
+  box-shadow: 0 2px 0 0 rgba(22, 29, 37, 0.05)
+}
+
+#yellow-btn:hover {
+  background-color: #e8b745;
+}
+
+#delete-btn {
+  border-radius: 8px;
+  padding: 8px 12px 8px 12px;
+  font-size: 11px;
+  background-color: rgb(241, 92, 100);
+  color:white;
+  border: none;
+  box-shadow: 0 2px 0 0 rgba(22, 29, 37, 0.05);
+}
+
+#delete-btn:hover {
+  background-color: #f14b54;
+  opacity: 1;
+}
+
 .event-page button {
   border: 1px solid white;
   color: white;
@@ -42,24 +85,6 @@
 
 .event-CTA-container button {
   margin-right: 20px;
-}
-
-#delete-btn {
-  width: 120px;
-  border-radius: 8px;
-  padding: 8px 12px 8px 12px;
-  font-size: 11px;
-  background-color: rgb(241, 92, 100);
-  color:white;
-  border: none;
-  margin: 0;
-  margin-top: 40px;
-  box-shadow: 0 2px 0 0 rgba(22, 29, 37, 0.05);
-}
-
-#delete-btn:hover {
-  background-color: #f14b54;
-  opacity: 1;
 }
 
 @keyframes fadein {
@@ -96,6 +121,12 @@
 }
 
 @media (max-width: 700px) {
+  .navigation-preview {
+    justify-content: center;
+  }
+  .navigation-preview button {
+    margin-right: 0;
+  }
   .copy-container {
     width: 75vw;
     margin-bottom: 30px;
