@@ -12,11 +12,11 @@ export default class Account extends React.Component {
         <div className="login-section">
           <h2>Already have an account?</h2>
           <Login />
-          <img src={arrowdown} alt="" />
+          <a href="#signupAnchor"><img src={arrowdown} alt="" /></a>
           <p>Not a member yet? Sign up below</p>
         </div>
         <div className="signup-section" id="signup">
-          <h2>New to Seize the party?</h2>
+          <a name="signupAnchor"><h2>New to Seize the party?</h2></a>
           <Signup />
         </div>
       </div>
