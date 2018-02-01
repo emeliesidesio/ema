@@ -38,7 +38,7 @@ export default class EventPreview extends React.Component {
           <h3>{formattedData}, {this.state.eventInfo.startTime} – {this.state.eventInfo.endTime}</h3>
           <h3>{this.state.eventInfo.location}</h3>
         </div>
-        <div className="CTA-container">
+        <div className="event-CTA-container">
           <button>I&lsquo;m joining</button>
           <button>I cannot make it</button>
         </div>

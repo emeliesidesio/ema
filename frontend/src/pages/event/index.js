@@ -85,7 +85,7 @@ export default class Event extends React.Component {
             <h3>{formattedData}, {this.state.eventInfo.startTime} – {this.state.eventInfo.endTime}</h3>
             <h3>{this.state.eventInfo.location}</h3>
           </div>
-          <div className="CTA-container">
+          <div className="event-CTA-container">
             <button value="Yes" onClick={this.handleRSVP}>I&lsquo;m joining</button>
             <button value="No" onClick={this.handleRSVP}>I cannot make it</button>
           </div>

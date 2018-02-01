@@ -34,7 +34,7 @@
   margin-bottom: 25px;
 }
 
-.CTA-container {
+.event-CTA-container {
   display: flex;
   justify-content: center;
 }
@@ -64,4 +64,31 @@
 
 .hide {
   display: none;
+}
+
+@media (min-width: 700px) and (max-width: 900px) {
+  .copy-container {
+    width: 62vw;
+  }
+}
+
+@media (max-width: 700px) {
+  .copy-container {
+    width: 75vw;
+    margin-bottom: 30px;
+  }
+  .copy-container h1 {
+    font-size: 55px;
+  }
+  .copy-container h2 {
+    font-size: 17px;
+  }
+  .event-CTA-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .event-CTA-container button {
+    margin: 0 0 20px 0;
+    width: 200px;
+  }
 }

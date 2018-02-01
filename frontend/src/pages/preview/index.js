@@ -35,7 +35,7 @@ export default class Preview extends React.Component {
   confirmSentEmail = () => {
     if (this.state.emailSent === "Yes") {
       this.setState({
-        message: "Your invites were sent",
+        message: "Your invites were sent!",
         show: !this.state.show
       })
       setTimeout(() => {
@@ -43,7 +43,7 @@ export default class Preview extends React.Component {
       }, 3500)
     } else if (this.state.emailSent === "No") {
       this.setState({
-        message: "Your invites were not sent",
+        message: "Your invites were not sent.",
         show: !this.state.show
       })
       setTimeout(() => {
