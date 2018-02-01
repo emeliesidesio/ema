@@ -42,3 +42,20 @@
   margin-top: 40px;
   color: rgb(70, 186, 171);
 }
+
+@media (max-width: 700px) {
+  .login-section h2 {
+    margin-top: 0;
+  }
+  .signup-section h2 {
+    margin-top: 0;
+  }
+  .login-section {
+    height: 600px;
+  }
+  .signup-section {
+    height: 640px;
+    padding: 0 40px 0 40px;
+    text-align: center;
+  }
+}

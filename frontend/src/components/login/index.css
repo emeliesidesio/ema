@@ -15,3 +15,10 @@
   font-size: 12px;
   font-style: italic;
 }
+
+@media (max-width: 700px) {
+  .login-form {
+    width: 300px;
+    height: 280px;
+  }
+}
