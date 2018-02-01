@@ -39,6 +39,10 @@
   justify-content: center;
 }
 
+.event-CTA-container button {
+  margin-right: 20px;
+}
+
 @keyframes fadein {
   from { opacity: 0; }
   to   { opacity: 0.8; }

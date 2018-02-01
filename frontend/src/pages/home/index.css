@@ -41,6 +41,10 @@
   justify-content: center;
 }
 
+.CTA-container button {
+  margin-right: 20px;
+}
+
 @media (min-width: 700px) and (max-width: 900px) {
   .start-copy-container {
     width: 62vw;

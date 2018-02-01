@@ -9,3 +9,14 @@
   justify-content: space-between;
   margin-top: 20px;
 }
+
+@media (max-width: 700px) {
+  .dashboard-guest-container p {
+    font-size: 10px;
+  }
+  .dashboard-guest-container .yellow-btn {
+    border-radius: 6px;
+    padding: 6px 10px 6px 10px;
+    font-size: 10px;
+  }
+}
