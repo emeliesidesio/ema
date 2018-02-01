@@ -99,6 +99,7 @@ const Guest = mongoose.model("guest", {
   }
 })
 
+// middleware to check Authentication
 const authUser = (req, res, next) => {
   User.findById(req.headers.id).then(user => {
     if (user && user.accessToken === req.headers.token) {
@@ -253,24 +254,24 @@ app.post("/login", (req, res) => {
   })
 })
 
-// middleware
-const findUser = (req, res, next) => {
-  User.findById(req.params.userId).then(user => {
-    if (user.accessToken === req.headers.token) {
-      req.user = user
-      next()
-    } else {
-      res.status(401).send("Unauthenticated")
-    }
-  })
-}
-
-// mount middleware
-app.use("/users/:userId", findUser)
-
-app.get("/users/:userId", (req, res) => {
-  res.json(req.user)
-})
+// // middleware
+// const findUser = (req, res, next) => {
+//   User.findById(req.params.userId).then(user => {
+//     if (user.accessToken === req.headers.token) {
+//       req.user = user
+//       next()
+//     } else {
+//       res.status(401).send("Unauthenticated")
+//     }
+//   })
+// }
+//
+// // mount middleware
+// app.use("/users/:userId", findUser)
+//
+// app.get("/users/:userId", (req, res) => {
+//   res.json(req.user)
+// })
 
 // Logout
 app.use("/logout", authUser)
