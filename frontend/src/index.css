@@ -98,7 +98,7 @@ input[type=time] {
   height: 34px;
   width: 320px;
   padding: 5px;
-  border-radius: 30px;
+  border-radius: 8px;
   margin: 40px 0 40px 0;
   outline: none;
 }
