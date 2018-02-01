@@ -33,7 +33,7 @@ export default class Dashboard extends React.Component {
   handleLogout = event => {
     event.preventDefault()
     fetch("https://seizethepartyevents.herokuapp.com/logout", {
-      method: "GET",
+      method: "POST",
       headers: {
         token: localStorage.getItem("userAccess"),
         id: localStorage.getItem("userId"),
@@ -52,7 +52,7 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard-page">
-        <button classname="remove-btn" onClick="handleLogout"></button>
+        <button className="remove-btn" onClick="handleLogout">Sign out</button>
         <div className="dashboard-container">
           <h2>Upcoming events</h2>
           {this.state.myEvents.map(event => {

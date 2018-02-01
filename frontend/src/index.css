@@ -60,6 +60,7 @@ h4 {
 a {
   text-decoration: none;
   color: white;
+  cursor: pointer;
 }
 
 button {
@@ -74,6 +75,7 @@ button {
   letter-spacing: 0.5px;
   font-weight: 300;
   color: white;
+  cursor: pointer;
 }
 
 input {
