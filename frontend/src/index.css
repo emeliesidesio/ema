@@ -89,10 +89,6 @@ input {
   color: grey;
 }
 
-input[type=time] {
-  width: 130px;
-}
-
 .scroll-container {
   font-weight: 300;
   border: 1px solid #ccc;
@@ -174,6 +170,10 @@ select {
 
 @media (max-width: 700px) {
   input {
+    width: 230px;
+    margin-top: 20px;
+  }
+  .scroll-container {
     width: 230px;
   }
 }
