@@ -5,3 +5,12 @@
   margin-bottom: 20px;
   width: 350px;
 }
+
+@media (max-width: 700px) {
+  .guest-container {
+    width: 270px;
+  }
+  .guest-container p {
+    font-size: 12px;
+  }
+}

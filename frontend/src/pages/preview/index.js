@@ -143,6 +143,10 @@ export default class Preview extends React.Component {
           <div className="message">{this.state.message}</div>
         </div>
         <div className="preview-page">
+          <div className="link-container">
+            <Link to={`/event/${this.props.match.params._id}`}><button className="yellow-btn">Preview event</button></Link>
+            <Link to="/dashboard"><button className="add-btn">Dashboard</button></Link>
+          </div>
           <h2>Edit your guestlist</h2>
           <div className="preview-container">
             <div className="email-list">
@@ -163,10 +167,6 @@ export default class Preview extends React.Component {
             <div className="send-invite">
               <button className="medium-blue-btn" type="submit" onClick={this.sendInvite}>Send invite</button>
             </div>
-          </div>
-          <div className="link-container">
-            <Link to={`/event/${this.props.match.params._id}`}><button className="yellow-btn">Preview event</button></Link>
-            <Link to="/dashboard"><button className="add-btn">Dashboard</button></Link>
           </div>
         </div>
       </div>
