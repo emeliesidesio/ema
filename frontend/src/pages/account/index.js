@@ -10,7 +10,7 @@ export default class Account extends React.Component {
     return (
       <div className="account-page">
         <div className="login-section">
-          <h2>Already an account?</h2>
+          <h2>Already have an account?</h2>
           <Login />
           <img src={arrowdown} alt="" />
           <p>Not a member yet? Sign up below</p>
