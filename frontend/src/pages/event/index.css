@@ -36,6 +36,7 @@
 
 #yellow-btn:hover {
   background-color: #e8b745;
+  opacity: 1;
 }
 
 #delete-btn {
