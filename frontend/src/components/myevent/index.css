@@ -27,3 +27,7 @@
 .up {
   display: none;
 }
+
+#edit-guestList {
+  margin-top: 20px;
+}

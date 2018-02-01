@@ -56,6 +56,7 @@ export default class MyEvent extends React.Component {
                 email={guest.email}
                 attending={guest.attending} />
             })}
+            <Link to={`/create-event/preview/${this.props.eventId}`} rel="noopener noreferrer" target="_blank"><button className="add-btn" id="edit-guestList">Edit Guestlist</button></Link>
           </div>
         </div>
       </div>
