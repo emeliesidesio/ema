@@ -45,7 +45,7 @@ export default class Dashboard extends React.Component {
                 eventId={event._id} />
             )
           })}
-          <button className="medium-red-btn"><Link to="/create-event">Create new event</Link></button>
+          <Link to="/create-event"><button className="medium-red-btn">Create new event</button></Link>
         </div>
       </div>
     )
