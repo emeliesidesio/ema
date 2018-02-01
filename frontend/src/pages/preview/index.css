@@ -25,6 +25,7 @@
   justify-content: center;
   box-shadow: 2px 2px 0 2px rgba(22, 29, 37, 0.05);
   padding: 50px 0 50px 0;
+  margin-bottom: 50px;
 }
 
 .add-guest-preview input {
