@@ -49,7 +49,6 @@ export default class EventPreview extends React.Component {
     const formattedData = moment(date).format("dddd MMM Do YYYY")
     return (
       <div className="event-page" style={{ backgroundImage: `url(${this.state.eventInfo.backgroundImage})` }}>
-        <button onClick={this.removeEvent}>Delete your event</button>
         <div className="copy-container">
           <h1>{this.state.eventInfo.title}</h1>
           <h2>{this.state.eventInfo.description}</h2>
@@ -58,8 +57,9 @@ export default class EventPreview extends React.Component {
         </div>
         <div className="event-CTA-container">
           <button>I&lsquo;m joining</button>
-          <button>I cannot make it</button>
+          <button>I can&lsquo;t join</button>
         </div>
+        <button id="delete-btn" onClick={this.removeEvent}>Delete your event</button>
       </div>
     )
   }

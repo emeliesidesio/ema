@@ -87,7 +87,7 @@ export default class Event extends React.Component {
           </div>
           <div className="event-CTA-container">
             <button value="Yes" onClick={this.handleRSVP}>I&lsquo;m joining</button>
-            <button value="No" onClick={this.handleRSVP}>I cannot make it</button>
+            <button value="No" onClick={this.handleRSVP}>I can&lsquo;t join</button>
           </div>
         </div>
       </div>
