@@ -30,7 +30,7 @@ export default [
     name: "Pool party"
   },
   {
-    image: "https://s14.postimg.org/wtvbymu4h/image01.jpg",
+    image: "https://s14.postimg.org/lh8oa8t0x/image02.jpg",
     id: "7",
     name: "Ice pop night"
   },
@@ -45,7 +45,7 @@ export default [
     name: "Cocktail hour"
   },
   {
-    image: "https://s14.postimg.org/a564z4a6p/sweet-ice-cream-photography-79569.jpg",
+    image: "https://s14.postimg.org/80bprnt2p/sweet-ice-cream-79569.jpg",
     id: "10",
     name: "Dazzling wedding"
   },
