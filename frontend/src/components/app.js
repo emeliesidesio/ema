@@ -1,5 +1,5 @@
 import React from "react"
-import { BrowserRouter, Route } from "react-router-dom"
+import { HashRouter, Route } from "react-router-dom"
 import Home from "pages/home"
 import Account from "pages/account"
 import Event from "pages/event"
@@ -13,7 +13,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <BrowserRouter>
+        <HashRouter>
           <div>
             <Route exact path="/" component={Home} />
             <Route exact path="/account" component={Account} />
@@ -23,7 +23,7 @@ class App extends React.Component {
             <Route exact path="/create-event/" component={CreateEvent} />
             <Route exact path="/create-event/preview/:_id" component={Preview} />
           </div>
-        </BrowserRouter>
+        </HashRouter>
       </div>
     )
   }
