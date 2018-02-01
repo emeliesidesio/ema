@@ -49,6 +49,7 @@ class Login extends React.Component {
           .then(json => {
             localStorage.setItem("userAccess", json.accessToken)
             localStorage.setItem("userId", json.userId)
+            localStorage.setItem("userEmail", json.userEmail)
             this.props.history.push("/dashboard/")
           })
       } else {

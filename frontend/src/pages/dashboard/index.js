@@ -33,6 +33,7 @@ export default class Dashboard extends React.Component {
   render() {
     return (
       <div className="dashboard-page">
+        {/* <button classname="remove-btn" onClick="handleLogout"></button> */}
         <div className="dashboard-container">
           <h2>Upcoming events</h2>
           {this.state.myEvents.map(event => {

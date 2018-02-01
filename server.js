@@ -265,6 +265,11 @@ app.get("/users/:userId", (req, res) => {
   res.json(req.user)
 })
 
+// Logout
+// app.get("/logout", (req, res) => {
+//
+// })
+
 const port = process.env.PORT || 8080
 app.listen(port, () => {
   console.log(`Server running on port ${port}`)
