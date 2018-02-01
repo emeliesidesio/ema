@@ -8,7 +8,10 @@ export default class Preview extends React.Component {
     super(props)
     this.state = {
       guestList: [],
-      email: ""
+      email: "",
+      emailSent: "",
+      message: "",
+      show: false
     }
   }
 
@@ -30,7 +33,23 @@ export default class Preview extends React.Component {
   }
 
   confirmSentEmail = () => {
-    alert("Invites were sent")
+    if (this.state.emailSent === "Yes") {
+      this.setState({
+        message: "Your invites were sent",
+        show: !this.state.show
+      })
+      setTimeout(() => {
+        this.setState({ message: "", show: "" })
+      }, 3500)
+    } else if (this.state.emailSent === "No") {
+      this.setState({
+        message: "Your invites were not sent",
+        show: !this.state.show
+      })
+      setTimeout(() => {
+        this.setState({ message: "", show: "" })
+      }, 3500)
+    }
   }
 
   sendInvite = event => {
@@ -47,10 +66,16 @@ export default class Preview extends React.Component {
       if (response.ok) {
         return response.json()
           .then(json => {
+            this.setState({
+              emailSent: "Yes"
+            })
             this.confirmSentEmail()
           })
       } else {
-        this.setState({ message: "Invitations were not sent" })
+        this.setState({
+          emailSent: "No"
+        })
+        this.confirmSentEmail()
       }
     })
   }
@@ -113,31 +138,36 @@ export default class Preview extends React.Component {
 
   render() {
     return (
-      <div className="preview-page">
-        <h2>Edit your guestlist</h2>
-        <div className="preview-container">
-          <div className="email-list">
-            {this.state.guestList.map(guest => {
-              return (
-                <Guest
-                  key={guest.email}
-                  id={guest._id}
-                  email={guest.email}
-                  handleRemove={this.removeGuest} />
-              )
-            })}
-          </div>
-          <form onSubmit={this.addEmailtoGuestList} className="add-guest-preview">
-            <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
-            <button className="add-btn">Add Guest</button>
-          </form>
-          <div className="send-invite">
-            <button className="medium-blue-btn" type="submit" onClick={this.sendInvite}>Send invite</button>
-          </div>
+      <div>
+        <div className={this.state.show ? "show" : "hide"}>
+          <div className="message">{this.state.message}</div>
         </div>
-        <div className="link-container">
-          <Link to={`/event/${this.props.match.params._id}`} rel="noopener noreferrer" target="_blank"><button className="yellow-btn">Preview event</button></Link>
-          <Link to="/dashboard"><button className="add-btn">Dashboard</button></Link>
+        <div className="preview-page">
+          <h2>Edit your guestlist</h2>
+          <div className="preview-container">
+            <div className="email-list">
+              {this.state.guestList.map(guest => {
+                return (
+                  <Guest
+                    key={guest.email}
+                    id={guest._id}
+                    email={guest.email}
+                    handleRemove={this.removeGuest} />
+                )
+              })}
+            </div>
+            <form onSubmit={this.addEmailtoGuestList} className="add-guest-preview">
+              <input type="email" value={this.state.email} onChange={this.addInvite} placeholder="Email address" />
+              <button className="add-btn">Add Guest</button>
+            </form>
+            <div className="send-invite">
+              <button className="medium-blue-btn" type="submit" onClick={this.sendInvite}>Send invite</button>
+            </div>
+          </div>
+          <div className="link-container">
+            <Link to={`/event/${this.props.match.params._id}`} rel="noopener noreferrer" target="_blank"><button className="yellow-btn">Preview event</button></Link>
+            <Link to="/dashboard"><button className="add-btn">Dashboard</button></Link>
+          </div>
         </div>
       </div>
     )
