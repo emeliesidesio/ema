@@ -30,10 +30,29 @@ export default class Dashboard extends React.Component {
     })
   }
 
+  handleLogout = event => {
+    event.preventDefault()
+    fetch("https://seizethepartyevents.herokuapp.com/logout", {
+      method: "GET",
+      headers: {
+        token: localStorage.getItem("userAccess"),
+        id: localStorage.getItem("userId"),
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    }).then(response => {
+      if (response.ok) {
+        localStorage.removeItem("userId", "userAccess")
+        this.props.history.push("/")
+      }
+    })
+  }
+
   render() {
     return (
       <div className="dashboard-page">
-        {/* <button classname="remove-btn" onClick="handleLogout"></button> */}
+        <button classname="remove-btn" onClick="handleLogout"></button>
         <div className="dashboard-container">
           <h2>Upcoming events</h2>
           {this.state.myEvents.map(event => {

@@ -27,11 +27,29 @@ export default class EventPreview extends React.Component {
     })
   }
 
+  removeEvent = event => {
+    event.preventDefault()
+    const { eventId } = this.props.match.params
+    fetch(`https://seizethepartyevents.herokuapp.com/events/${eventId}`, {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(this.state)
+    }).then(response => {
+      if (response.ok) {
+        this.props.history.push("/")
+      }
+    })
+  }
+
   render() {
     const { date } = this.state.eventInfo
     const formattedData = moment(date).format("dddd MMM Do YYYY")
     return (
       <div className="event-page" style={{ backgroundImage: `url(${this.state.eventInfo.backgroundImage})` }}>
+        <button onClick={this.removeEvent}>Delete your event</button>
         <div className="copy-container">
           <h1>{this.state.eventInfo.title}</h1>
           <h2>{this.state.eventInfo.description}</h2>

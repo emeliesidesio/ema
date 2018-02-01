@@ -184,6 +184,13 @@ app.get("/events/:_id", (req, res) => {
   })
 })
 
+// delete event
+app.delete("/events/:_id", (req, res) => {
+  EventInfo.findByIdAndRemove({ _id: req.params._id })
+    .then(() => { res.status(201).send("Event was removed") })
+    .catch(err => { res.status(401).send(err) })
+})
+
 // send emails
 const sendMail = (to, text) => {
   const msg = {
@@ -266,9 +273,15 @@ app.get("/users/:userId", (req, res) => {
 })
 
 // Logout
-// app.get("/logout", (req, res) => {
-//
-// })
+app.use("/logout", authUser)
+
+app.post("/logout", (req, res) => {
+  // req.user.accessToken = uuid()
+  req.user.accessToken = "ksdskdjksdj"
+  req.user.save()
+    .then(() => res.status(200).send("Logged out"))
+    .catch(err => { res.status(401).json(err) })
+})
 
 const port = process.env.PORT || 8080
 app.listen(port, () => {
