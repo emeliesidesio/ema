@@ -19,7 +19,8 @@ class CreateEvent extends React.Component {
       guests: [{ email }],
       startTime: "",
       endTime: "",
-      backgroundImage: ""
+      backgroundImage: "",
+      hostedBy: ""
     }
   }
 
@@ -80,6 +81,12 @@ class CreateEvent extends React.Component {
     })
   }
 
+  handleHost = event => {
+    this.setState({
+      hostedBy: event.target.value
+    })
+  }
+
   handleSubmit = event => {
     event.preventDefault()
     fetch("https://seizethepartyevents.herokuapp.com/events", {
@@ -115,6 +122,7 @@ class CreateEvent extends React.Component {
             <div><p>End</p><input type="time" value={this.state.endTime} onChange={this.handleEndTime} required /></div>
           </div>
           <div><input type="text" value={this.state.location} onChange={this.handleLocation} required placeholder="Location" /></div>
+          <div><input type="text" value={this.state.hostedBy} onChange={this.handleHost} required placeholder="Hosted by" /></div>
           <select className="scroll-container" onChange={this.handleBackground}>
             <option>Choose theme</option>
             {Background.map(background => (

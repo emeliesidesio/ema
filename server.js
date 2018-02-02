@@ -85,6 +85,10 @@ const EventInfo = mongoose.model("eventInfo", {
     type: String,
     required: true
   },
+  hostedBy: {
+    type: String,
+    required: true
+  },
   guests: [{ type: mongoose.Schema.Types.ObjectId, ref: "Guest" }]
 })
 
@@ -156,7 +160,8 @@ app.post("/events", (req, res) => {
     startTime: req.body.startTime,
     endTime: req.body.endTime,
     backgroundImage: req.body.backgroundImage,
-    description: req.body.description
+    description: req.body.description,
+    hostedBy: req.body.hostedBy
   })
 
   event.save()
@@ -206,6 +211,7 @@ const sendMail = (to, text) => {
   sgMail.send(msg)
 }
 
+// we want to add the hostedBy to email sent. (guest model needs to be updated)
 app.post("/events/:eventId/send_emails", (req, res) => {
   Guest.find({ eventId: req.params.eventId }).then(eventGuests => {
     eventGuests.map(guest => {
@@ -254,31 +260,11 @@ app.post("/login", (req, res) => {
   })
 })
 
-// // middleware
-// const findUser = (req, res, next) => {
-//   User.findById(req.params.userId).then(user => {
-//     if (user.accessToken === req.headers.token) {
-//       req.user = user
-//       next()
-//     } else {
-//       res.status(401).send("Unauthenticated")
-//     }
-//   })
-// }
-//
-// // mount middleware
-// app.use("/users/:userId", findUser)
-//
-// app.get("/users/:userId", (req, res) => {
-//   res.json(req.user)
-// })
-
 // Logout
 app.use("/logout", authUser)
 
 app.post("/logout", (req, res) => {
-  // req.user.accessToken = uuid()
-  req.user.accessToken = "ksdskdjksdj"
+  req.user.accessToken = uuid()
   req.user.save()
     .then(() => res.status(200).send("Logged out"))
     .catch(err => { res.status(401).json(err) })
