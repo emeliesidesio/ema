@@ -57,7 +57,7 @@ export default class EventPreview extends React.Component {
         <div className="copy-container">
           <h1>{this.state.eventInfo.title}</h1>
           <h2>{this.state.eventInfo.description}</h2>
-          <h3>{this.state.eventInfo.hostedBy}</h3>
+          <h3>Hosted by: {this.state.eventInfo.hostedBy}</h3><br />
           <h3>{formattedData}, {this.state.eventInfo.startTime} – {this.state.eventInfo.endTime}</h3>
           <h3>{this.state.eventInfo.location}</h3>
         </div>
