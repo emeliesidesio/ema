@@ -60,7 +60,7 @@ export default [
     name: "Tropical"
   },
   {
-    image: "https://s13.postimg.org/7ejpjy9vr/tim-mossholder-418237.jpg",
+    image: "https://s14.postimg.org/yth1azx29/tim-mossholder-418237-new.jpg",
     id: "13",
     name: "Color crush"
   }
