@@ -215,7 +215,7 @@ const sendMail = (to, text) => {
 app.post("/events/:eventId/send_emails", (req, res) => {
   Guest.find({ eventId: req.params.eventId }).then(eventGuests => {
     eventGuests.map(guest => {
-      const url = `www.seizetheparty.events/${guest.eventId}/guests/${guest._id}`
+      const url = `seizetheparty.events/${guest.eventId}/guests/${guest._id}`
       const emailMessage = `<h2>Hi!</h2><br/>You are invited to a party!<br/><a href="${url}" style={{ textDecoration: "none" }}>RSVP here</a><br/><br/>Enjoy your party! 🥂🎊🍿💥`
       sendMail(guest.email, emailMessage)
     })
