@@ -9,8 +9,7 @@ class Signup extends React.Component {
     this.state = {
       email: "",
       password: "",
-      firstName: "",
-      lastName: "",
+      name: "",
       message: ""
     }
   }
@@ -27,15 +26,9 @@ class Signup extends React.Component {
     })
   }
 
-  handleFirstName = event => {
+  handleName = event => {
     this.setState({
-      firstName: event.target.value
-    })
-  }
-
-  handleLastName = event => {
-    this.setState({
-      lastName: event.target.value
+      name: event.target.value
     })
   }
 
@@ -77,8 +70,7 @@ class Signup extends React.Component {
       <div>
         <form onSubmit={this.handleSubmit} className="signup-form">
           <p id="signup-message">{this.state.message}</p>
-          <div><input type="text" value={this.state.firstName} onChange={this.handleFirstName} required placeholder="First name" /></div>
-          <div><input type="text" value={this.state.lastName} onChange={this.handleLastName} required placeholder="Last name" /></div>
+          <div><input type="text" value={this.state.name} onChange={this.handleName} required placeholder="Name" /></div>
           <div><input type="email" value={this.state.email} onChange={this.handleEmail} required placeholder="Email" /></div>
           <div>
             <input
