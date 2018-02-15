@@ -201,7 +201,7 @@ const sendMail = (to, text) => {
       email: "noreply@seizetheparty.events",
       name: "Seize the Party"
     },
-    subject: "Reunion reminder! 🎈🎉 ",
+    subject: "You are invited! 🎈🎉 ",
     html: text
   }
   sgMail.send(msg)
@@ -212,7 +212,7 @@ app.post("/events/:eventId/send_emails", (req, res) => {
   Guest.find({ eventId: req.params.eventId }).then(eventGuests => {
     eventGuests.map(guest => {
       const url = `seizetheparty.events/#/${guest.eventId}/guests/${guest._id}`
-      const emailMessage = `<h2>Hi!</h2><br/>Friendly reminder to book your calendars!<br/><br/>If you haven't replied yet, <strong>RSVP here:</strong><br/><a href="${url}">${url}</a><br/><br/>Enjoy your party! 🥂🎊🍿💥`
+      const emailMessage = `<h2>Hi!</h2><br/>Book your calendar, you are invited to an event!<br/><br/><strong>RSVP here:</strong><br/><a href="${url}">${url}</a><br/><br/>Enjoy your party! 🥂🎊🍿💥`
       sendMail(guest.email, emailMessage)
     })
   })
