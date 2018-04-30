@@ -11,8 +11,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint-config-technigo": "^1.5.0",
-    "nodemon": "^1.14.11"
+    "eslint-config-technigo": "^1.5.2",
+    "nodemon": "^1.17.3"
   },
   "dependencies": {
     "@sendgrid/mail": "^6.2.1",
@@ -21,10 +21,11 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
-    "express": "^4.16.2",
+    "express": "^4.16.3",
     "gh-pages": "^1.1.0",
-    "mongoose": "^5.0.1",
-    "mongoose-unique-validator": "^2.0.0",
+    "hoek": "^5.0.3",
+    "mongoose": "^5.0.16",
+    "mongoose-unique-validator": "^2.0.1",
     "uuid": "^3.2.1"
   }
 }
